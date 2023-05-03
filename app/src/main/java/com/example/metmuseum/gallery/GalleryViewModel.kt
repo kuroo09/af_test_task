@@ -18,8 +18,8 @@ class GalleryViewModel : ViewModel() {
     val status: LiveData<String>
         get() = _status
 
-    private val _metObjects = MutableLiveData<MetObject>()
-    val metObjects: LiveData<MetObject> = _metObjects
+    private val _metObjects = MutableLiveData<List<MetObject>>()
+    val metObjects: LiveData<List<MetObject>> = _metObjects
 
     // object from "objects" endpoint that holds every id of MetObjects
     private val _idList = MutableLiveData<MetCollectionObject>()
@@ -34,10 +34,15 @@ class GalleryViewModel : ViewModel() {
         viewModelScope.launch {
             getGalleryObjectIds()
             Log.i("Data Fetching", "All Ids fetched")
+            val objectList = mutableListOf<MetObject>()
             try {
                 Log.i("Data Fetching", "Starting Object fetching")
-                _metObjects.value = MetApi.retrofitService.getObjectById(_idList.value!!.objectIds[354])
-                _status.value = _metObjects.value!!.imgUrl
+                for (id in 50..100) {
+                    val objectById = MetApi.retrofitService.getObjectById(_idList.value!!.objectIds[id])
+                    objectList.add(objectById)
+                }
+                _metObjects.value = objectList
+                _status.value = "Success. All Data FETCHED"
                 Log.i("Data Fetching", "One Object fetched!!!!!")
             } catch (e: Exception) {
                 _status.value = "Failure ${e.message}"

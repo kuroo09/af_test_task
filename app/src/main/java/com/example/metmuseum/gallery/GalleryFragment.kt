@@ -24,6 +24,7 @@ class GalleryFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        binding.objectsGrid.adapter = ObjectGridAdapter()
         return binding.root
     }
 
