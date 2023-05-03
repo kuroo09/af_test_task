@@ -36,7 +36,7 @@ class GalleryViewModel : ViewModel() {
                 Log.i("DataFetching", "Data loading")
                 _idList.value = MetApi.retrofitService.getObjectIds()
                 _status.value = _idList.value!!.total.toString()
-                Log.i("Data Fetching", "Data received. Last Id = ${_idList.value!!.objectIds.lastIndex}")
+                Log.i("Data Fetching", "Data received. Last ObjectId = ${_idList.value!!.objectIds.lastIndex}")
             } catch (e: Exception) {
                 _status.value = "Failure ${e.message}"
             }
