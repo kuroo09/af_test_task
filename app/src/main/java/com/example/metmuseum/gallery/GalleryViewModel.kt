@@ -32,16 +32,28 @@ class GalleryViewModel : ViewModel() {
 
     private fun getGalleryObjects() {
         viewModelScope.launch {
+            getGalleryObjectIds()
+            Log.i("Data Fetching", "All Ids fetched")
             try {
-                Log.i("DataFetching", "Data loading")
-                _idList.value = MetApi.retrofitService.getObjectIds()
-                _status.value = _idList.value!!.total.toString()
-                Log.i("Data Fetching", "Data received. Last ObjectId = ${_idList.value!!.objectIds.lastIndex}")
+                Log.i("Data Fetching", "Starting Object fetching")
+                _metObjects.value = MetApi.retrofitService.getObjectById(_idList.value!!.objectIds[354])
+                _status.value = _metObjects.value!!.imgUrl
+                Log.i("Data Fetching", "One Object fetched!!!!!")
             } catch (e: Exception) {
                 _status.value = "Failure ${e.message}"
             }
         }
     }
 
+    private suspend fun getGalleryObjectIds() {
+        try {
+            Log.i("DataFetching", "Data loading")
+            _idList.value = MetApi.retrofitService.getObjectIds()
+            _status.value = _idList.value!!.total.toString()
+            Log.i("Data Fetching", "Data received. Last ObjectId = ${_idList.value!!.objectIds.lastIndex}")
+        } catch (e: Exception) {
+            _status.value = "Failure while ID fetching ${e.message}"
+        }
+    }
 
 }
