@@ -1,6 +1,8 @@
 package com.example.metmuseum.gallery
 
+import android.content.Context
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -27,7 +29,7 @@ class GalleryViewModel : ViewModel() {
 
     // call getGalleryObjects() on init to display immediately
     init {
-        getGalleryObjects()
+        //getGalleryObjects()
     }
 
     private fun getGalleryObjects() {
@@ -58,6 +60,18 @@ class GalleryViewModel : ViewModel() {
             Log.i("Data Fetching", "Data received. Last ObjectId = ${_idList.value!!.objectIds.lastIndex}")
         } catch (e: Exception) {
             _status.value = "Failure while ID fetching ${e.message}"
+        }
+    }
+
+    fun searchObjects(id: Int, context: Context) {
+        viewModelScope.launch {
+            try {
+                _metObjects.value = listOf(MetApi.retrofitService.getObjectById(id))
+                Log.i("SEARCH", "${_metObjects.value!![0].imgUrl}")
+            }catch (e: Exception) {
+                _metObjects.value = listOf()
+                Toast.makeText(context, "Searched ID does not exist.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
