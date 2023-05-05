@@ -7,20 +7,21 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.metmuseum.databinding.GridViewItemBinding
 import com.example.metmuseum.network.MetObject
+import com.example.metmuseum.network.MetObjectId
 
-class ObjectGridAdapter : ListAdapter<MetObject,
-        ObjectGridAdapter.MetObjectViewHolder>(DiffCallback) {
+class ObjectListAdapter : ListAdapter<MetObjectId,
+        ObjectListAdapter.MetObjectViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ObjectGridAdapter.MetObjectViewHolder {
+    ): ObjectListAdapter.MetObjectViewHolder {
         // return new MetObjectViewHolder created by inflating GridViewItemBinding
         return MetObjectViewHolder(GridViewItemBinding.inflate(
             LayoutInflater.from(parent.context)))
     }
 
-    override fun onBindViewHolder(holder: ObjectGridAdapter.MetObjectViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ObjectListAdapter.MetObjectViewHolder, position: Int) {
         // get object associated with current RecyclerView position
         val metObject = getItem(position)
         holder.bind(metObject)
@@ -29,20 +30,20 @@ class ObjectGridAdapter : ListAdapter<MetObject,
     class MetObjectViewHolder(private var binding: GridViewItemBinding):
             RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(MetObject: MetObject) {
+        fun bind(MetObjectId: MetObjectId) {
             // bind for displaying grid_view_item
-            binding.objectImage = MetObject
+            binding.idViewModel = MetObjectId
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MetObject>() {
-        override fun areItemsTheSame(oldItem: MetObject, newItem: MetObject): Boolean {
-            return oldItem.id == newItem.id
+    companion object DiffCallback : DiffUtil.ItemCallback<MetObjectId>() {
+        override fun areItemsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
+            return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: MetObject, newItem: MetObject): Boolean {
-            return oldItem.imgUrl == newItem.imgUrl
+        override fun areContentsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
+            return oldItem.id == newItem.id
         }
 
     }
