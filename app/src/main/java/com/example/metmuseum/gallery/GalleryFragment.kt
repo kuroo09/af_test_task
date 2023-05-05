@@ -33,10 +33,11 @@ class GalleryFragment : Fragment() {
 
         _binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                p0?.let { viewModel.searchObjects(p0.toInt(), context!!) }
+                p0?.let { viewModel.searchObjects(p0, context!!) }
                 // hide keyboard on submit
                 val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(_binding.searchField.windowToken, 0)
+                _binding.searchField.clearFocus()
                 return true
             }
 

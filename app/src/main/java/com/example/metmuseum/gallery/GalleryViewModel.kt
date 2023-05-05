@@ -10,15 +10,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.metmuseum.network.MetApi
 import com.example.metmuseum.network.MetCollectionObject
 import com.example.metmuseum.network.MetObject
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GalleryViewModel : ViewModel() {
 
-    // internal MutableLiveData that stores the status of the most recent request
-    private val _status = MutableLiveData<String>()
-    // external immutable LiveData for the request status
-    val status: LiveData<String>
-        get() = _status
 
     private val _metObjects = MutableLiveData<List<MetObject>>()
     val metObjects: LiveData<List<MetObject>> = _metObjects
@@ -34,20 +30,19 @@ class GalleryViewModel : ViewModel() {
 
     private fun getGalleryObjects() {
         viewModelScope.launch {
-            getGalleryObjectIds()
+            //getGalleryObjectIds()
             Log.i("Data Fetching", "All Ids fetched")
             val objectList = mutableListOf<MetObject>()
             try {
                 Log.i("Data Fetching", "Starting Object fetching")
                 for (id in 50..100) {
-                    val objectById = MetApi.retrofitService.getObjectById(_idList.value!!.objectIds[id])
+                    val objectById =
+                        MetApi.retrofitService.getObjectById(_idList.value!!.objectIds[id])
                     objectList.add(objectById)
                 }
-                _metObjects.value = objectList
-                _status.value = "Success. All Data FETCHED"
+                _metObjects.postValue(objectList)
                 Log.i("Data Fetching", "One Object fetched!!!!!")
             } catch (e: Exception) {
-                _status.value = "Failure ${e.message}"
             }
         }
     }
@@ -56,23 +51,44 @@ class GalleryViewModel : ViewModel() {
         try {
             Log.i("DataFetching", "Data loading")
             _idList.value = MetApi.retrofitService.getObjectIds()
-            _status.value = _idList.value!!.total.toString()
-            Log.i("Data Fetching", "Data received. Last ObjectId = ${_idList.value!!.objectIds.lastIndex}")
+            Log.i(
+                "Data Fetching",
+                "Data received. Last ObjectId = ${_idList.value!!.objectIds.lastIndex}"
+            )
         } catch (e: Exception) {
-            _status.value = "Failure while ID fetching ${e.message}"
         }
     }
 
-    fun searchObjects(id: Int, context: Context) {
-        viewModelScope.launch {
+    fun searchObjects(userInput: String, context: Context) {
+        viewModelScope.launch(Dispatchers.IO) {
+            Log.i(
+                "SEARCH",
+                "https://collectionapi.metmuseum.org/public/collection/v1/search?q=$userInput"
+            )
             try {
-                _metObjects.value = listOf(MetApi.retrofitService.getObjectById(id))
-                Log.i("SEARCH", "${_metObjects.value!![0].imgUrl}")
-            }catch (e: Exception) {
-                _metObjects.value = listOf()
-                Toast.makeText(context, "Searched ID does not exist.", Toast.LENGTH_SHORT).show()
+                _idList.postValue(MetApi.retrofitService.getSearchedObjects(userInput))
+                Log.i("SEARCH", "Found ${_idList.value!!.total} works of art.")
+                displayObjects()
+            } catch (e: Exception) {
+                println(e.toString())
+                _metObjects.postValue(listOf())
             }
         }
+    }
+
+    private suspend fun displayObjects() {
+        val objectList = mutableListOf<MetObject>()
+        Log.i("Data Fetching", "Starting Object fetching")
+        for (id in _idList.value!!.objectIds) {
+            try {
+                val objectById = MetApi.retrofitService.getObjectById(id)
+                objectList.add(objectById)
+            } catch (e: Exception) {
+                print("long loop error:${e}")
+            }
+
+        }
+        _metObjects.postValue(objectList)
     }
 
 }
