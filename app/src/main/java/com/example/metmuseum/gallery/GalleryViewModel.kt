@@ -10,25 +10,38 @@ import androidx.lifecycle.viewModelScope
 import com.example.metmuseum.network.MetApi
 import com.example.metmuseum.network.MetCollectionObject
 import com.example.metmuseum.network.MetObject
+import com.example.metmuseum.network.MetObjectId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class GalleryViewModel : ViewModel() {
 
+    private val _metObjectIdList = MutableLiveData<List<MetObjectId>>()
+    val metObjectIdList: LiveData<List<MetObjectId>> = _metObjectIdList
 
-    private val _metObjects = MutableLiveData<List<MetObject>>()
-    val metObjects: LiveData<List<MetObject>> = _metObjects
-
-    // object from "objects" endpoint that holds every id of MetObjects
-    private val _idList = MutableLiveData<MetCollectionObject>()
-    val idList: LiveData<MetCollectionObject> = _idList
+    fun searchObjects(userInput: String, context: Context) {
+        val idList = mutableListOf<MetObjectId>()
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val idCollectionObject = MetApi.retrofitService.getSearchedObjects(userInput)
+                idCollectionObject.objectIds.forEachIndexed { index, id ->
+                    idList.add(MetObjectId(id))
+                }
+            } catch (e: Exception) {
+                println(e.toString())
+            }
+            _metObjectIdList.postValue(idList)
+        }
+    }
 
     // call getGalleryObjects() on init to display immediately
     init {
         //getGalleryObjects()
     }
 
-    private fun getGalleryObjects() {
+
+
+    /*private fun getGalleryObjects() {
         viewModelScope.launch {
             //getGalleryObjectIds()
             Log.i("Data Fetching", "All Ids fetched")
@@ -57,26 +70,10 @@ class GalleryViewModel : ViewModel() {
             )
         } catch (e: Exception) {
         }
-    }
+    }*/
 
-    fun searchObjects(userInput: String, context: Context) {
-        viewModelScope.launch(Dispatchers.IO) {
-            Log.i(
-                "SEARCH",
-                "https://collectionapi.metmuseum.org/public/collection/v1/search?q=$userInput"
-            )
-            try {
-                _idList.postValue(MetApi.retrofitService.getSearchedObjects(userInput))
-                Log.i("SEARCH", "Found ${_idList.value!!.total} works of art.")
-                displayObjects()
-            } catch (e: Exception) {
-                println(e.toString())
-                _metObjects.postValue(listOf())
-            }
-        }
-    }
 
-    private suspend fun displayObjects() {
+    /*private suspend fun displayObjects() {
         val objectList = mutableListOf<MetObject>()
         Log.i("Data Fetching", "Starting Object fetching")
         for (id in _idList.value!!.objectIds) {
@@ -89,6 +86,6 @@ class GalleryViewModel : ViewModel() {
 
         }
         _metObjects.postValue(objectList)
-    }
+    }*/
 
 }

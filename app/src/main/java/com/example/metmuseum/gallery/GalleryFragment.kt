@@ -1,7 +1,6 @@
 package com.example.metmuseum.gallery
 
 import android.content.Context
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -10,11 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
-import androidx.lifecycle.lifecycleScope
-import com.example.metmuseum.R
 import com.example.metmuseum.databinding.FragmentGalleryBinding
-import kotlinx.coroutines.launch
 
 class GalleryFragment : Fragment() {
 
@@ -37,7 +32,7 @@ class GalleryFragment : Fragment() {
                 // hide keyboard on submit
                 val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(_binding.searchField.windowToken, 0)
-                _binding.searchField.clearFocus()
+                //_binding.searchField.clearFocus()
                 return true
             }
 
@@ -46,7 +41,7 @@ class GalleryFragment : Fragment() {
             }
         })
 
-        _binding.objectsGrid.adapter = ObjectGridAdapter()
+        _binding.objectsList.adapter = ObjectListAdapter()
         return _binding.root
     }
 

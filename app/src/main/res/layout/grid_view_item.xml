@@ -5,18 +5,15 @@
 
     <data>
         <variable
-            name="objectImage"
-            type="com.example.metmuseum.network.MetObject" />
+            name="idViewModel"
+            type="com.example.metmuseum.network.MetObjectId" />
     </data>
 
-    <ImageView
-        android:id="@+id/met_image"
-        android:layout_width="wrap_content"
-        android:layout_height="170dp"
-        android:scaleType="fitXY"
-        android:adjustViewBounds="true"
+    <TextView
+        android:id="@+id/met_id"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
         android:padding="2dp"
-        app:imageUrl="@{objectImage.imgUrl}"
-        tools:src="@tools:sample/backgrounds/scenic"/>
+        android:text="@{String.valueOf(idViewModel.id)}" />
 
 </layout>
