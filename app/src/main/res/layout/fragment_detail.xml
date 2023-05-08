@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:scaleType="fitCenter"
             android:layout_height="350dp"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="@dimen/detail_10"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -29,22 +29,19 @@
             android:id="@+id/titleView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Object Name ggggggg gggggg gggggg gggggg gggggg ggggg g g"
-            android:paddingLeft="10dp"
-            android:paddingTop="10dp"
-            android:paddingRight="10dp"
-            android:paddingBottom="10dp"
+            android:padding="@dimen/detail_10"
             android:text="@{detailViewModel.metObject.title}"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:text="Object Name" />
 
         <TextView
             android:id="@+id/artistView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Artist"
-            android:layout_marginLeft="10dp"
+            tools:text="Artist"
+            android:layout_marginLeft="@dimen/detail_10"
             android:paddingBottom="8dp"
             android:text="@{@string/artist(detailViewModel.metObject.artist)}"
             app:layout_constraintStart_toStartOf="@id/titleView"
@@ -54,9 +51,9 @@
             android:id="@+id/dateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Time"
+            tools:text="Time"
             android:paddingStart="20dp"
-            android:paddingBottom="8dp"
+            android:paddingBottom="@dimen/detail_8"
             android:text="@{detailViewModel.metObject.objectDate}"
             app:layout_constraintStart_toEndOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/titleView" />
@@ -65,8 +62,8 @@
             android:id="@+id/cultureView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Culture"
-            android:paddingBottom="8dp"
+            tools:text="Culture"
+            android:paddingBottom="@dimen/detail_8"
             android:text="@{@string/culture(detailViewModel.metObject.culture)}"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/artistView" />
@@ -75,8 +72,8 @@
             android:id="@+id/departmentView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Department"
-            android:paddingBottom="8dp"
+            tools:text="Department"
+            android:paddingBottom="@dimen/detail_8"
             android:text="@{@string/department(detailViewModel.metObject.department)}"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/cultureView" />
@@ -85,8 +82,8 @@
             android:id="@+id/repoView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Repository"
-            android:paddingBottom="8dp"
+            tools:text="Repository"
+            android:paddingBottom="@dimen/detail_8"
             android:text="@{detailViewModel.metObject.repository}"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/departmentView" />
@@ -95,9 +92,9 @@
             android:id="@+id/morePhotosView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Repository"
-            android:paddingBottom="8dp"
-            android:text="More pictures:"
+            tools:text="More Pictures:"
+            android:paddingBottom="@dimen/detail_8"
+            android:text="@string/more_pictures"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/repoView" />
 
@@ -113,7 +110,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/morePhotosView"
-
             app:listData="@{detailViewModel.metPhotos}"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item" />

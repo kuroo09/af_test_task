@@ -38,12 +38,13 @@ class DetailViewModel(metId: Int) : ViewModel() {
                 urlList.add(MetPhoto(url))
             }
             _metPhotos.postValue(urlList)
-
+            //_metObject.value?.replaceEmptyStrings()
         }
     }
-
-
 }
+
+
+
 
 class DetailViewModelFactory(private val metId: Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

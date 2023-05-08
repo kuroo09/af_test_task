@@ -5,4 +5,5 @@
     <string name="culture">Culture: %1$s</string>
     <string name="department">Department: %1$s</string>
     <string name="more_photos">Other pictures:</string>
+    <string name="more_pictures">More pictures:</string>
 </resources>
