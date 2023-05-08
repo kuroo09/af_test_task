@@ -17,7 +17,7 @@
             android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:scaleType="fitCenter"
-            android:layout_height="400dp"
+            android:layout_height="350dp"
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -91,18 +91,30 @@
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/departmentView" />
 
+        <TextView
+            android:id="@+id/morePhotosView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Repository"
+            android:paddingBottom="8dp"
+            android:text="More pictures:"
+            app:layout_constraintStart_toStartOf="@id/artistView"
+            app:layout_constraintTop_toBottomOf="@+id/repoView" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/objects_grid"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:padding="6dp"
-            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/repoView"
-            app:spanCount="2"
-            app:listData="@{detailViewModel.metObject.additionalImages}"
+            app:layout_constraintTop_toBottomOf="@id/morePhotosView"
+
+            app:listData="@{detailViewModel.metPhotos}"
             tools:itemCount="16"
             tools:listitem="@layout/grid_view_item" />
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,3 +10,7 @@ data class MetCollectionObject (
 class MetObjectId (
     val id: Int
         )
+
+class MetPhoto (
+    val url: String
+        )

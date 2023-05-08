@@ -11,12 +11,16 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.navArgs
 import com.example.metmuseum.network.MetApi
 import com.example.metmuseum.network.MetObject
+import com.example.metmuseum.network.MetPhoto
 import kotlinx.coroutines.launch
 
 class DetailViewModel(metId: Int) : ViewModel() {
 
     private val _metObject = MutableLiveData<MetObject>()
     val metObject: LiveData<MetObject> = _metObject
+
+    private val _metPhotos = MutableLiveData<List<MetPhoto>>()
+    val metPhotos: LiveData<List<MetPhoto>> = _metPhotos
 
     init {
         getMetObjectById(metId)
@@ -26,10 +30,15 @@ class DetailViewModel(metId: Int) : ViewModel() {
         viewModelScope.launch {
             try {
                 _metObject.value = MetApi.retrofitService.getObjectById(metId)
-
             } catch (e: Exception) {
                 print("long loop error:${e}")
             }
+            val urlList = mutableListOf<MetPhoto>()
+            _metObject.value?.additionalImages?.forEachIndexed { index, url ->
+                urlList.add(MetPhoto(url))
+            }
+            _metPhotos.postValue(urlList)
+
         }
     }
 

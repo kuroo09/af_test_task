@@ -34,6 +34,7 @@ class DetailFragment : Fragment() {
 
         _binding.detailViewModel = viewModel
 
+        _binding.objectsGrid.adapter = DetailListAdapter()
         return _binding.root
     }
 
