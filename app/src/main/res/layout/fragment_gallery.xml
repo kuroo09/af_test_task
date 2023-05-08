@@ -38,7 +38,7 @@
             app:listData="@{viewModel.metObjectIdList}"
             app:spanCount="2"
             tools:itemCount="16"
-            tools:listitem="@layout/grid_view_item" />
+            tools:listitem="@layout/list_view_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
