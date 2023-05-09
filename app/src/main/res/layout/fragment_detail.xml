@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="@dimen/detail_10"
-            android:text="@{detailViewModel.metObject.title}"
+            android:text="@{detailViewModel.metObject.title.isEmpty() ? `Untitled Object` : detailViewModel.metObject.title}"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -40,23 +40,28 @@
             android:id="@+id/artistView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Artist"
-            android:layout_marginLeft="@dimen/detail_10"
+            android:layout_marginStart="@dimen/detail_10"
+            android:layout_marginEnd="@dimen/detail_10"
             android:paddingBottom="8dp"
-            android:text="@{@string/artist(detailViewModel.metObject.artist)}"
+            android:text="@{detailViewModel.metObject.artist.isEmpty() ? `Created by unknown` : @string/artist(detailViewModel.metObject.artist)}"
             app:layout_constraintStart_toStartOf="@id/titleView"
-            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            app:layout_constraintWidth_max="200dp"
+            tools:text="Artist" />
 
         <TextView
             android:id="@+id/dateView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Time"
+            android:layout_marginStart="@dimen/detail_10"
+            android:layout_marginEnd="@dimen/detail_10"
             android:paddingStart="20dp"
             android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.objectDate}"
-            app:layout_constraintStart_toEndOf="@id/artistView"
-            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+            android:text="@{detailViewModel.metObject.objectDate.isEmpty() ? `Time unknown` : detailViewModel.metObject.objectDate}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleView"
+            app:layout_constraintWidth_max="160dp"
+            tools:text="Time" />
 
         <TextView
             android:id="@+id/cultureView"
@@ -64,7 +69,8 @@
             android:layout_height="wrap_content"
             tools:text="Culture"
             android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `Sheesh` : @string/culture(detailViewModel.metObject.culture)}"
+            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No information about the culture` : @string/culture(detailViewModel.metObject.culture)}"
+            app:layout_constraintWidth_max="220dp"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/artistView" />
 
@@ -72,11 +78,12 @@
             android:id="@+id/departmentView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Department"
+            android:layout_marginTop="8dp"
             android:paddingBottom="@dimen/detail_8"
-            android:text="@{@string/department(detailViewModel.metObject.department)}"
+            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No department assigned` : @string/department(detailViewModel.metObject.department)}"
             app:layout_constraintStart_toStartOf="@id/artistView"
-            app:layout_constraintTop_toBottomOf="@+id/cultureView" />
+            app:layout_constraintTop_toBottomOf="@+id/cultureView"
+            tools:text="Department" />
 
         <TextView
             android:id="@+id/repoView"
@@ -84,7 +91,7 @@
             android:layout_height="wrap_content"
             tools:text="Repository"
             android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.repository}"
+            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No repository assigned` : detailViewModel.metObject.repository}"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/departmentView" />
 
@@ -94,7 +101,7 @@
             android:layout_height="wrap_content"
             tools:text="More Pictures:"
             android:paddingBottom="@dimen/detail_8"
-            android:text="@string/more_pictures"
+            android:text="@{detailViewModel.metObject.additionalImages.isEmpty() ? `No more pictures available` : @string/more_pictures}"
             app:layout_constraintStart_toStartOf="@id/artistView"
             app:layout_constraintTop_toBottomOf="@+id/repoView" />
 

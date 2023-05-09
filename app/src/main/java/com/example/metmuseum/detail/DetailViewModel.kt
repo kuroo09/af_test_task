@@ -26,13 +26,10 @@ class DetailViewModel(metId: Int) : ViewModel() {
         viewModelScope.launch {
             val metObject: MetObject
             try {
-                metObject = MetApi.retrofitService.getObjectById(metId)
-                //metObject.replaceEmptyStrings()
-                _metObject.postValue(metObject)
+                _metObject.value = MetApi.retrofitService.getObjectById(metId)
             } catch (e: Exception) {
                 print("long loop error:${e}")
             }
-
             val urlList = mutableListOf<MetPhoto>()
             _metObject.value?.additionalImages?.forEachIndexed { index, url ->
                 urlList.add(MetPhoto(url))
