@@ -13,112 +13,133 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:scaleType="fitCenter"
-            android:layout_height="350dp"
-            android:layout_marginTop="@dimen/detail_10"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:imageUrl="@{detailViewModel.metObject.imgUrl}"
-            tools:src="@tools:sample/backgrounds/scenic" />
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
-        <TextView
-            android:id="@+id/titleView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/detail_10"
-            android:text="@{detailViewModel.metObject.title.isEmpty() ? `Untitled Object` : detailViewModel.metObject.title}"
-            android:textSize="20sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageView"
-            tools:text="Object Name" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/artistView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_10"
-            android:layout_marginEnd="@dimen/detail_10"
-            android:paddingBottom="8dp"
-            android:text="@{detailViewModel.metObject.artist.isEmpty() ? `Created by unknown` : @string/artist(detailViewModel.metObject.artist)}"
-            app:layout_constraintStart_toStartOf="@id/titleView"
-            app:layout_constraintTop_toBottomOf="@+id/titleView"
-            app:layout_constraintWidth_max="200dp"
-            tools:text="Artist" />
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="400dp"
+                    android:layout_margin="@dimen/detail_10"
+                    android:scaleType="fitCenter"
+                    app:imageUrl="@{detailViewModel.metObject.imgUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic" />
 
-        <TextView
-            android:id="@+id/dateView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/detail_10"
-            android:layout_marginEnd="@dimen/detail_10"
-            android:paddingStart="20dp"
-            android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.objectDate.isEmpty() ? `Time unknown` : detailViewModel.metObject.objectDate}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleView"
-            app:layout_constraintWidth_max="160dp"
-            tools:text="Time" />
+                <TextView
+                    android:id="@+id/titleView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/detail_10"
+                    android:paddingEnd="@dimen/detail_10"
+                    android:text="@{detailViewModel.metObject.title.isEmpty() ? `Untitled Object` : detailViewModel.metObject.title}"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:text="Object Name" />
 
-        <TextView
-            android:id="@+id/cultureView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Culture"
-            android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No information about the culture` : @string/culture(detailViewModel.metObject.culture)}"
-            app:layout_constraintWidth_max="220dp"
-            app:layout_constraintStart_toStartOf="@id/artistView"
-            app:layout_constraintTop_toBottomOf="@+id/artistView" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/infoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/detail_10"
+                    app:layout_constraintTop_toBottomOf="@id/titleView"
+                    app:layout_constraintStart_toStartOf="@id/titleView">
 
-        <TextView
-            android:id="@+id/departmentView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No department assigned` : @string/department(detailViewModel.metObject.department)}"
-            app:layout_constraintStart_toStartOf="@id/artistView"
-            app:layout_constraintTop_toBottomOf="@+id/cultureView"
-            tools:text="Department" />
+                    <TextView
+                        android:id="@+id/artistView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/detail_10"
+                        android:layout_marginTop="@dimen/detail_10"
+                        android:text="@{detailViewModel.metObject.artist.isEmpty() ? `Created by unknown` : @string/artist(detailViewModel.metObject.artist)}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_max="220dp"
+                        tools:text="Artist is a cool definition of what a creator of creative art is" />
 
-        <TextView
-            android:id="@+id/repoView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Repository"
-            android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No repository assigned` : detailViewModel.metObject.repository}"
-            app:layout_constraintStart_toStartOf="@id/artistView"
-            app:layout_constraintTop_toBottomOf="@+id/departmentView" />
+                    <TextView
+                        android:id="@+id/dateView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/detail_10"
+                        android:text="@{detailViewModel.metObject.objectDate.isEmpty() ? `Time unknown` : detailViewModel.metObject.objectDate}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/artistView"
+                        app:layout_constraintWidth_max="150dp"
+                        tools:text="Time when the crazy Object in the picture above was created" />
 
-        <TextView
-            android:id="@+id/morePhotosView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="More Pictures:"
-            android:paddingBottom="@dimen/detail_8"
-            android:text="@{detailViewModel.metObject.additionalImages.isEmpty() ? `No more pictures available` : @string/more_pictures}"
-            app:layout_constraintStart_toStartOf="@id/artistView"
-            app:layout_constraintTop_toBottomOf="@+id/repoView" />
+                    <TextView
+                        android:id="@+id/cultureView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_8"
+                        android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No information about the culture` : detailViewModel.metObject.culture}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/artistView"
+                        app:layout_constraintWidth_max="220dp"
+                        tools:text="Culture" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/objects_grid"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="6dp"
-            android:orientation="horizontal"
-            android:scrollbars="horizontal"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/morePhotosView"
-            app:listData="@{detailViewModel.metPhotos}"
-            tools:itemCount="16"
-            tools:listitem="@layout/grid_view_item" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+                <TextView
+                    android:id="@+id/departmentView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_10"
+                    android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No department assigned` : @string/department(detailViewModel.metObject.department)}"
+                    app:layout_constraintStart_toStartOf="@+id/titleView"
+                    app:layout_constraintTop_toBottomOf="@+id/infoView"
+                    tools:text="Department" />
+
+                <TextView
+                    android:id="@+id/repoView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_8"
+                    android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No repository assigned` : detailViewModel.metObject.repository}"
+                    app:layout_constraintStart_toStartOf="@+id/titleView"
+                    app:layout_constraintTop_toBottomOf="@+id/departmentView"
+                    tools:text="Repository" />
+
+                <TextView
+                    android:id="@+id/morePhotosView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_10"
+                    android:text="@{detailViewModel.metObject.additionalImages.isEmpty() ? `No more pictures available` : @string/more_pictures}"
+                    app:layout_constraintStart_toStartOf="@+id/titleView"
+                    app:layout_constraintTop_toBottomOf="@+id/repoView"
+                    tools:text="More Pictures:" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/objects_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:scrollbars="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/morePhotosView"
+                    app:listData="@{detailViewModel.metPhotos}"
+                    app:layout_constraintHeight_min="200dp"
+                    tools:itemCount="16"
+                    tools:listitem="@layout/grid_view_item" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
