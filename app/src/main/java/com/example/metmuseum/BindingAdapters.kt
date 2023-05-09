@@ -16,7 +16,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
         // convert URL string to a Uri object using toUri()
         val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
         imgView.load(imgUri) {
-            placeholder(R.drawable.loading_image)
+            placeholder(R.drawable.loading_animation)
             error(R.drawable.baseline_broken_image_24)
         }
     }
