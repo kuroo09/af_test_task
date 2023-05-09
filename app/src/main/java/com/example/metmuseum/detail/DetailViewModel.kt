@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.NavController
 import com.example.metmuseum.network.MetApi
 import com.example.metmuseum.network.MetObject
 import com.example.metmuseum.network.MetPhoto
@@ -22,10 +23,11 @@ class DetailViewModel(metId: Int) : ViewModel() {
     val metPhotos: LiveData<List<MetPhoto>> = _metPhotos
 
     // prevents displaying null values while fetching data
-    private val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean> = _isLoading
+    private val _isLoading = MutableLiveData<String>()
+    val isLoading: LiveData<String> = _isLoading
+
     init {
-        _isLoading.value = true
+        _isLoading.value = "LOADING"
         getMetObjectById(metId)
     }
 
@@ -37,9 +39,9 @@ class DetailViewModel(metId: Int) : ViewModel() {
             val metObject: MetObject
             try {
                 _metObject.value = MetApi.retrofitService.getObjectById(metId)
-                _isLoading.value = false
+                _isLoading.value = "NOT_LOADING"
             } catch (e: Exception) {
-                print("long loop error:${e}")
+                _isLoading.value = "ERROR"
             }
             // get list of additional images to display them in recycler view
             val urlList = mutableListOf<MetPhoto>()

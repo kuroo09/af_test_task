@@ -6,7 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import android.widget.Toast.LENGTH_LONG
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.metmuseum.R
 import com.example.metmuseum.databinding.FragmentDetailBinding
@@ -34,19 +38,20 @@ class DetailFragment : Fragment() {
 
         _binding.detailViewModel = viewModel
 
+        // prevents displaying data before fetching done and returns to id list when object not available
         viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-           if (isLoading) {
-               _binding.nestedScrollView.visibility = View.GONE
-           } else {
-               _binding.nestedScrollView.visibility = View.VISIBLE
+           when (isLoading) {
+               "LOADING" -> _binding.nestedScrollView.visibility = View.GONE
+               "NOT_LOADING" -> _binding.nestedScrollView.visibility = View.VISIBLE
+               "ERROR" -> {
+                   val navController = findNavController()
+                   navController.popBackStack()
+                   Toast.makeText(context, "Object currently not available.", LENGTH_LONG).show()
+               }
            }
         }
 
         _binding.objectsGrid.adapter = DetailListAdapter()
         return _binding.root
     }
-
-
-
-
 }
