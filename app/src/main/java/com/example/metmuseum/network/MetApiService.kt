@@ -28,6 +28,9 @@ interface MetApiService {
 
     @GET("objects/{id}")
     suspend fun getObjectById(@Path("id") id: Int): MetObject
+
+    @GET("search")
+    suspend fun getSearchedObjects(@Query("q") query: String): MetCollectionObject
 }
 
 // singleton object to initialize Retrofit service and accessible form the rest of the app
