@@ -1,14 +1,10 @@
 package com.example.metmuseum.detail
 
-import android.app.Application
-import android.os.Bundle
-import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.navArgs
 import com.example.metmuseum.network.MetApi
 import com.example.metmuseum.network.MetObject
 import com.example.metmuseum.network.MetPhoto
@@ -28,17 +24,20 @@ class DetailViewModel(metId: Int) : ViewModel() {
 
     private fun getMetObjectById(metId: Int) {
         viewModelScope.launch {
+            val metObject: MetObject
             try {
-                _metObject.value = MetApi.retrofitService.getObjectById(metId)
+                metObject = MetApi.retrofitService.getObjectById(metId)
+                //metObject.replaceEmptyStrings()
+                _metObject.postValue(metObject)
             } catch (e: Exception) {
                 print("long loop error:${e}")
             }
+
             val urlList = mutableListOf<MetPhoto>()
             _metObject.value?.additionalImages?.forEachIndexed { index, url ->
                 urlList.add(MetPhoto(url))
             }
             _metPhotos.postValue(urlList)
-            //_metObject.value?.replaceEmptyStrings()
         }
     }
 }
