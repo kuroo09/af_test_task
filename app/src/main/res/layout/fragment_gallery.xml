@@ -27,16 +27,15 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/objects_list"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:padding="6dp"
+            android:layout_margin="6dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_field"
             app:listData="@{viewModel.metObjectIdList}"
-            app:spanCount="2"
             tools:itemCount="16"
             tools:listitem="@layout/list_view_item" />
 

@@ -39,6 +39,7 @@ class GalleryViewModel : ViewModel() {
                 status = "NO_IDS"
             }
             _metObjectIdList.postValue(idList)
+            // change value to show Toast for not finding any fitting id
             _statusMessage.postValue(status)
         }
     }

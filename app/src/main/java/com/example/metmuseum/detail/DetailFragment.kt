@@ -34,6 +34,14 @@ class DetailFragment : Fragment() {
 
         _binding.detailViewModel = viewModel
 
+        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
+           if (isLoading) {
+               _binding.nestedScrollView.visibility = View.GONE
+           } else {
+               _binding.nestedScrollView.visibility = View.VISIBLE
+           }
+        }
+
         _binding.objectsGrid.adapter = DetailListAdapter()
         return _binding.root
     }

@@ -22,7 +22,7 @@ class ObjectListAdapter : ListAdapter<MetObjectId,
         // return new MetObjectViewHolder created by inflating GridViewItemBinding
         return MetObjectViewHolder(
             ListViewItemBinding.inflate(
-            LayoutInflater.from(parent.context)))
+            LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: ObjectListAdapter.MetObjectViewHolder, position: Int) {

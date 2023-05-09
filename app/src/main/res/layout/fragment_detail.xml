@@ -14,6 +14,7 @@
         android:layout_height="match_parent">
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:fillViewport="true">
@@ -40,6 +41,7 @@
                     android:id="@+id/titleView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_10"
                     android:layout_marginStart="@dimen/detail_10"
                     android:paddingEnd="@dimen/detail_10"
                     android:text="@{detailViewModel.metObject.title.isEmpty() ? `Untitled Object` : detailViewModel.metObject.title}"
