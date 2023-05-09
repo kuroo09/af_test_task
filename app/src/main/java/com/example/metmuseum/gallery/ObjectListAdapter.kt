@@ -2,10 +2,13 @@ package com.example.metmuseum.gallery
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.metmuseum.databinding.GridViewItemBinding
+import com.example.metmuseum.R
+import com.example.metmuseum.databinding.ListViewItemBinding
 import com.example.metmuseum.network.MetObject
 import com.example.metmuseum.network.MetObjectId
 
@@ -17,7 +20,8 @@ class ObjectListAdapter : ListAdapter<MetObjectId,
         viewType: Int
     ): ObjectListAdapter.MetObjectViewHolder {
         // return new MetObjectViewHolder created by inflating GridViewItemBinding
-        return MetObjectViewHolder(GridViewItemBinding.inflate(
+        return MetObjectViewHolder(
+            ListViewItemBinding.inflate(
             LayoutInflater.from(parent.context)))
     }
 
@@ -25,9 +29,16 @@ class ObjectListAdapter : ListAdapter<MetObjectId,
         // get object associated with current RecyclerView position
         val metObject = getItem(position)
         holder.bind(metObject)
+
+        val idView = holder.itemView.findViewById<TextView>(R.id.met_id)
+        idView.setOnClickListener {
+            val action = GalleryFragmentDirections.actionGalleryFragmentToDetailFragment(idView.text.toString().toInt())
+            holder.itemView.findNavController().navigate(action)
+        }
+
     }
 
-    class MetObjectViewHolder(private var binding: GridViewItemBinding):
+    class MetObjectViewHolder(private var binding: ListViewItemBinding):
             RecyclerView.ViewHolder(binding.root) {
 
         fun bind(MetObjectId: MetObjectId) {

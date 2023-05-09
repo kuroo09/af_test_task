@@ -5,9 +5,10 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.metmuseum.detail.DetailListAdapter
 import com.example.metmuseum.gallery.ObjectListAdapter
-import com.example.metmuseum.network.MetObject
 import com.example.metmuseum.network.MetObjectId
+import com.example.metmuseum.network.MetPhoto
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
@@ -26,3 +27,10 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<MetObjectId>?) {
     val adapter = recyclerView.adapter as ObjectListAdapter
     adapter.submitList(data)
 }
+
+@BindingAdapter("listData")
+fun bindRecyclerViewDetail(recyclerView: RecyclerView, data: List<MetPhoto>?) {
+    val adapter = recyclerView.adapter as DetailListAdapter
+    adapter.submitList(data)
+}
+

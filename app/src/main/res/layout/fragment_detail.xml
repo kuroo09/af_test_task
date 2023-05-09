@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <data>
+        <variable
+            name="detailViewModel"
+            type="com.example.metmuseum.detail.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:scaleType="fitCenter"
+            android:layout_height="350dp"
+            android:layout_marginTop="@dimen/detail_10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{detailViewModel.metObject.imgUrl}"
+            tools:src="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/titleView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/detail_10"
+            android:text="@{detailViewModel.metObject.title}"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageView"
+            tools:text="Object Name" />
+
+        <TextView
+            android:id="@+id/artistView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Artist"
+            android:layout_marginLeft="@dimen/detail_10"
+            android:paddingBottom="8dp"
+            android:text="@{@string/artist(detailViewModel.metObject.artist)}"
+            app:layout_constraintStart_toStartOf="@id/titleView"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+        <TextView
+            android:id="@+id/dateView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Time"
+            android:paddingStart="20dp"
+            android:paddingBottom="@dimen/detail_8"
+            android:text="@{detailViewModel.metObject.objectDate}"
+            app:layout_constraintStart_toEndOf="@id/artistView"
+            app:layout_constraintTop_toBottomOf="@+id/titleView" />
+
+        <TextView
+            android:id="@+id/cultureView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Culture"
+            android:paddingBottom="@dimen/detail_8"
+            android:text="@{@string/culture(detailViewModel.metObject.culture)}"
+            app:layout_constraintStart_toStartOf="@id/artistView"
+            app:layout_constraintTop_toBottomOf="@+id/artistView" />
+
+        <TextView
+            android:id="@+id/departmentView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Department"
+            android:paddingBottom="@dimen/detail_8"
+            android:text="@{@string/department(detailViewModel.metObject.department)}"
+            app:layout_constraintStart_toStartOf="@id/artistView"
+            app:layout_constraintTop_toBottomOf="@+id/cultureView" />
+
+        <TextView
+            android:id="@+id/repoView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Repository"
+            android:paddingBottom="@dimen/detail_8"
+            android:text="@{detailViewModel.metObject.repository}"
+            app:layout_constraintStart_toStartOf="@id/artistView"
+            app:layout_constraintTop_toBottomOf="@+id/departmentView" />
+
+        <TextView
+            android:id="@+id/morePhotosView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="More Pictures:"
+            android:paddingBottom="@dimen/detail_8"
+            android:text="@string/more_pictures"
+            app:layout_constraintStart_toStartOf="@id/artistView"
+            app:layout_constraintTop_toBottomOf="@+id/repoView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/objects_grid"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="6dp"
+            android:orientation="horizontal"
+            android:scrollbars="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/morePhotosView"
+            app:listData="@{detailViewModel.metPhotos}"
+            tools:itemCount="16"
+            tools:listitem="@layout/grid_view_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
