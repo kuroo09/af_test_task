@@ -1,15 +1,11 @@
 package com.example.metmuseum.gallery
 
 import android.content.Context
-import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.metmuseum.network.MetApi
-import com.example.metmuseum.network.MetCollectionObject
-import com.example.metmuseum.network.MetObject
 import com.example.metmuseum.network.MetObjectId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -39,7 +35,7 @@ class GalleryViewModel : ViewModel() {
                 status = "NO_IDS"
             }
             _metObjectIdList.postValue(idList)
-            // change value to show Toast for not finding any fitting id
+            // change value to show Toast for not finding any fitting id.
             _statusMessage.postValue(status)
         }
     }

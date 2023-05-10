@@ -36,7 +36,6 @@ class DetailViewModel(metId: Int) : ViewModel() {
      */
     private fun getMetObjectById(metId: Int) {
         viewModelScope.launch {
-            val metObject: MetObject
             try {
                 _metObject.value = MetApi.retrofitService.getObjectById(metId)
                 _isLoading.value = "NOT_LOADING"
@@ -45,14 +44,13 @@ class DetailViewModel(metId: Int) : ViewModel() {
             }
             // get list of additional images to display them in recycler view
             val urlList = mutableListOf<MetPhoto>()
-            _metObject.value?.additionalImages?.forEachIndexed { index, url ->
+            _metObject.value?.additionalImages?.forEachIndexed { _, url ->
                 urlList.add(MetPhoto(url))
             }
             _metPhotos.postValue(urlList)
         }
     }
 }
-
 
 class DetailViewModelFactory(private val metId: Int) : ViewModelProvider.Factory {
     override fun <T : ViewModel> create(modelClass: Class<T>): T {

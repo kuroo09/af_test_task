@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">METMuseum</string>
+    <string name="app_name">MET Gallery</string>
     <string name="search_hint">Search for Art</string>
     <string name="artist">Created by %1$s</string>
     <string name="culture">Culture: %1$s</string>

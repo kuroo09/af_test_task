@@ -1,8 +1,10 @@
 package com.example.metmuseum.network
 
 import com.squareup.moshi.Json
-import kotlin.reflect.KMutableProperty
 
+/**
+ * Object holding all data for the requested ID fetched from the API.
+ */
 data class MetObject (
     @Json(name = "objectID")val id: Int,
     @Json(name = "primaryImage")val imgUrl: String,

@@ -10,6 +10,10 @@ import com.example.metmuseum.gallery.ObjectListAdapter
 import com.example.metmuseum.network.MetObjectId
 import com.example.metmuseum.network.MetPhoto
 
+/**
+ * BindingAdapter for ImageView to display image from received URL, a loading animation while URL
+ * not ready for use and an error image in case there is no URL.
+ */
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl: String?) {
     imgUrl?.let {
@@ -22,12 +26,18 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
     }
 }
 
+/**
+ * BindingAdapter for binding a list of IDs to the RecyclerView.
+ */
 @BindingAdapter("listData")
 fun bindRecyclerView(recyclerView: RecyclerView, data: List<MetObjectId>?) {
     val adapter = recyclerView.adapter as ObjectListAdapter
     adapter.submitList(data)
 }
 
+/**
+ * BindingAdapter for binding a list of additional images to the RecyclerView.
+ */
 @BindingAdapter("listData")
 fun bindRecyclerViewDetail(recyclerView: RecyclerView, data: List<MetPhoto>?) {
     val adapter = recyclerView.adapter as DetailListAdapter
