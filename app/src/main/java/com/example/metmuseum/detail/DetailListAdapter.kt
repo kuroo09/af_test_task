@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.metmuseum.databinding.GridViewItemBinding
 import com.example.metmuseum.network.MetPhoto
 
+/**
+ * Adapter class that handles the RecyclerView on Detail screen.
+ */
 class DetailListAdapter : ListAdapter<MetPhoto, DetailListAdapter.MetPhotoViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(
