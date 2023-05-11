@@ -13,6 +13,12 @@ import com.example.metmuseum.databinding.FragmentDetailBinding
 
 class DetailFragment : Fragment() {
 
+
+    /*
+    * TODOs
+    * 1-) convert lateinits to lazy
+    *
+    * */
     private lateinit var viewModel: DetailViewModel
     private lateinit var viewModelFactory: DetailViewModelFactory
     private lateinit var _binding: FragmentDetailBinding

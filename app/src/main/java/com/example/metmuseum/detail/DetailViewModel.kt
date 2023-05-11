@@ -12,6 +12,15 @@ import com.example.metmuseum.network.MetPhoto
 import kotlinx.coroutines.launch
 import java.lang.Thread.sleep
 
+
+/*
+* TODOs
+* 1-) Convert 3 observation to single one with power of sealed class
+* 2-) use livedata builder
+* 3-) get rid of isLoading as string. Instead, use objects (result of 1. action will cover this one)
+* 4-) Use Ui object instead of directly accessing the api result
+*
+* */
 class DetailViewModel(metId: Int) : ViewModel() {
 
     // object fetched from the API

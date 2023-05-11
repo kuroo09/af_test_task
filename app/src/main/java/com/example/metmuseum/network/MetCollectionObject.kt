@@ -2,6 +2,8 @@ package com.example.metmuseum.network
 
 import com.squareup.moshi.Json
 
+//TODO convert suitable classes to value class
+
 /**
  * Object fetched from the API that holds a list of IDs fitting the search term.
  */

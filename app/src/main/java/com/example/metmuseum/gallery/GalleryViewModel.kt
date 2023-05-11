@@ -10,6 +10,13 @@ import com.example.metmuseum.network.MetObjectId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
+
+
+/*
+* TODOs
+* 1-) Convert 2 observation to single one with power of sealed class
+* 2-) use livedata builder
+* */
 class GalleryViewModel : ViewModel() {
 
     private val _metObjectIdList = MutableLiveData<List<MetObjectId>>()
