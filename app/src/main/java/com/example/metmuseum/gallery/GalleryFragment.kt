@@ -35,7 +35,6 @@ class GalleryFragment : Fragment() {
                 val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(_binding.searchField.windowToken, 0)
                 _binding.searchField.clearFocus()   // prevents double execution of method on Enter key
-                _binding.objectsList.clearFocus()   // prevents focus on RecyclerView highlighting it gray
                 return true
             }
 
@@ -67,6 +66,7 @@ class GalleryFragment : Fragment() {
             viewModel = result
             loadingView.visibility = View.GONE
             objectsList.isInvisible = false
+            objectsList.clearFocus()
         }
     }
 }

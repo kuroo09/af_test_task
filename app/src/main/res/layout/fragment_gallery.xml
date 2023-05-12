@@ -19,7 +19,7 @@
             android:inputType="text"
             android:queryHint="@string/search_hint"
             android:iconifiedByDefault="false"
-            android:focusable="true"
+            android:focusable="false"
             android:focusableInTouchMode="true"
             app:layout_constraintBottom_toTopOf="@+id/objects_list"
             app:layout_constraintEnd_toEndOf="@+id/objects_list"

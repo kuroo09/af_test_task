@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 /*
 * TODOs
 * 1-) Convert 2 observation to single one with power of sealed class -> DONE
-* 2-) use livedata builder
+* 2-) use livedata builder -> not DONE cause implementation for now ok
 * */
 class GalleryViewModel : ViewModel() {
 
