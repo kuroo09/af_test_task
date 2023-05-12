@@ -11,6 +11,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
+import androidx.core.view.isInvisible
 import com.example.metmuseum.databinding.FragmentGalleryBinding
 
 class GalleryFragment : Fragment() {
@@ -26,12 +27,10 @@ class GalleryFragment : Fragment() {
 
         _binding.lifecycleOwner = this
 
-        _binding.viewModel = viewModel
-
         // Handle SearchView actions.
         _binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                p0?.let { viewModel.searchObjects(p0, context!!) }
+                p0?.let { viewModel.searchObjects(p0) }
                 // hide keyboard on submit
                 val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(_binding.searchField.windowToken, 0)
@@ -45,16 +44,29 @@ class GalleryFragment : Fragment() {
             }
         })
 
-        // Display Toast when no objects found for search term.
-        viewModel.statusMessage.observe(viewLifecycleOwner) { status ->
-            status.let {
-                if (it == "NO_IDS") {
-                    Toast.makeText(context, "No objects found.", LENGTH_SHORT).show()
-                }
+        viewModel.metObjectIdList.observe(viewLifecycleOwner){ result ->
+            when (result) {
+                SearchResult.Error -> displayToast()
+                SearchResult.Loading -> _binding.loadingView.visibility = View.VISIBLE
+                is SearchResult.SearchModel -> applyUiModel(result)
             }
         }
 
         _binding.objectsList.adapter = ObjectListAdapter()
         return _binding.root
+    }
+
+    private fun displayToast() {
+        _binding.loadingView.visibility = View.GONE
+        _binding.objectsList.isInvisible = true
+        Toast.makeText(context, "No objects found.", LENGTH_SHORT).show()
+    }
+
+    private fun applyUiModel(result: SearchResult.SearchModel) {
+        _binding.apply {
+            viewModel = result
+            loadingView.visibility = View.GONE
+            objectsList.isInvisible = false
+        }
     }
 }

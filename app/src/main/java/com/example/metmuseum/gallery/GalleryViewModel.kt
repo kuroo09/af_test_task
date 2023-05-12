@@ -14,36 +14,26 @@ import kotlinx.coroutines.launch
 
 /*
 * TODOs
-* 1-) Convert 2 observation to single one with power of sealed class
+* 1-) Convert 2 observation to single one with power of sealed class -> DONE
 * 2-) use livedata builder
 * */
 class GalleryViewModel : ViewModel() {
 
-    private val _metObjectIdList = MutableLiveData<List<MetObjectId>>()
-    val metObjectIdList: LiveData<List<MetObjectId>> = _metObjectIdList
-
-    private val _statusMessage = MutableLiveData<String>()
-    val statusMessage: LiveData<String> = _statusMessage
+    private val _metObjectIdList = MutableLiveData<SearchResult>()
+    val metObjectIdList: LiveData<SearchResult> = _metObjectIdList
 
     /**
      * Fetch all objects from the API that fit somehow the user input and create a list of
      * MetObjectId objects to display the result ids.
      */
-    fun searchObjects(userInput: String, context: Context) {
-        val idList = mutableListOf<MetObjectId>()
-        var status = ""
+    fun searchObjects(userInput: String) {
+        _metObjectIdList.value = SearchResult.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val idCollectionObject = MetApi.retrofitService.getSearchedObjects(userInput)
-                idCollectionObject.objectIds.forEachIndexed { index, id ->
-                    idList.add(MetObjectId(id))
-                }
+                _metObjectIdList.postValue(MetApi.retrofitService.getSearchedObjects(userInput).toSearchModel())
             } catch (e: Exception) {
-                status = "NO_IDS"
+                _metObjectIdList.postValue(SearchResult.Error)
             }
-            _metObjectIdList.postValue(idList)
-            // change value to show Toast for not finding any fitting id.
-            _statusMessage.postValue(status)
         }
     }
 
