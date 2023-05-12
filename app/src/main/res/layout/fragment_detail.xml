@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="detailViewModel"
-            type="com.example.metmuseum.detail.DetailViewModel" />
+            name="uiModel"
+            type="com.example.metmuseum.detail.Result.UIModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,7 +32,7 @@
                     android:layout_height="400dp"
                     android:layout_margin="@dimen/detail_10"
                     android:scaleType="fitCenter"
-                    app:imageUrl="@{detailViewModel.metObject.imgUrl}"
+                    app:imageUrl="@{uiModel.imgUrl}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -45,7 +45,7 @@
                     android:layout_marginStart="@dimen/detail_10"
                     android:layout_marginTop="@dimen/detail_10"
                     android:paddingEnd="@dimen/detail_10"
-                    android:text="@{detailViewModel.metObject.title.isEmpty() ? `Untitled Object` : detailViewModel.metObject.title}"
+                    android:text="@{uiModel.title}"
                     android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/imageView"
@@ -65,7 +65,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/detail_10"
                         android:layout_marginRight="@dimen/detail_10"
-                        android:text="@{detailViewModel.metObject.artist.isEmpty() ? `Created by unknown` : @string/artist(detailViewModel.metObject.artist)}"
+                        android:text="@{uiModel.artist}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintWidth_max="220dp"
@@ -76,7 +76,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginRight="@dimen/detail_10"
-                        android:text="@{detailViewModel.metObject.objectDate.isEmpty() ? `Time unknown` : detailViewModel.metObject.objectDate}"
+                        android:text="@{uiModel.objectDate}"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/artistView"
                         app:layout_constraintWidth_max="150dp"
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/detail_8"
-                        android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No information about the culture` : detailViewModel.metObject.culture}"
+                        android:text="@{uiModel.culture}"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/artistView"
                         app:layout_constraintWidth_max="220dp"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/detail_14"
-                    android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No department assigned` : @string/department(detailViewModel.metObject.department)}"
+                    android:text="@{uiModel.department}"
                     app:layout_constraintStart_toStartOf="@+id/titleView"
                     app:layout_constraintTop_toBottomOf="@+id/infoView"
                     tools:text="Department" />
@@ -111,7 +111,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/detail_8"
-                    android:text="@{detailViewModel.metObject.culture.isEmpty() ? `No repository assigned` : detailViewModel.metObject.repository}"
+                    android:text="@{uiModel.repository}"
                     app:layout_constraintStart_toStartOf="@+id/titleView"
                     app:layout_constraintTop_toBottomOf="@+id/departmentView"
                     tools:text="Repository" />
@@ -121,7 +121,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/detail_14"
-                    android:text="@{detailViewModel.metObject.additionalImages.isEmpty() ? `No more pictures available` : @string/more_pictures}"
+                    android:text="@{uiModel.imageList.isEmpty() ? `No more pictures available` : @string/more_pictures}"
                     app:layout_constraintStart_toStartOf="@+id/titleView"
                     app:layout_constraintTop_toBottomOf="@+id/repoView"
                     tools:text="More Pictures:" />
@@ -133,11 +133,12 @@
                     android:orientation="horizontal"
                     android:padding="6dp"
                     android:scrollbars="horizontal"
+                    app:listData="@{uiModel.imageList}"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintHeight_min="200dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/morePhotosView"
-                    app:listData="@{detailViewModel.metPhotos}"
+
                     tools:itemCount="16"
                     tools:listitem="@layout/grid_view_item" />
             </androidx.constraintlayout.widget.ConstraintLayout>

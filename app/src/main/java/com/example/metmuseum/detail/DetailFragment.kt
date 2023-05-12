@@ -16,36 +16,45 @@ class DetailFragment : Fragment() {
 
     /*
     * TODOs
-    * 1-) convert lateinits to lazy
-    *
+    * 1-) convert lateinits to lazy -> DONE
+    * Questions: lazy init of _binding?
     * */
-    private lateinit var viewModel: DetailViewModel
-    private lateinit var viewModelFactory: DetailViewModelFactory
+
+    private val viewModel: DetailViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
+    }
+    private val viewModelFactory: DetailViewModelFactory by lazy {
+        DetailViewModelFactory(DetailFragmentArgs.fromBundle(requireArguments()).metId)
+    }
     private lateinit var _binding: FragmentDetailBinding
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDetailBinding.inflate(inflater)
 
         _binding.lifecycleOwner = this
 
-        viewModelFactory = DetailViewModelFactory(DetailFragmentArgs.fromBundle(requireArguments()).metId)
-        viewModel = ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
-        _binding.detailViewModel = viewModel
-
-        // prevents displaying data before fetching done and returns to id list when object not available
-        viewModel.isLoading.observe(viewLifecycleOwner) { isLoading ->
-           when (isLoading) {
-               "LOADING" -> _binding.nestedScrollView.visibility = View.GONE
-               "NOT_LOADING" -> _binding.nestedScrollView.visibility = View.VISIBLE
-               "ERROR" -> displayToast()
-           }
+        viewModel.result.observe(viewLifecycleOwner) { result ->
+            when (result) {
+                Result.Error -> displayToast()
+                Result.Loading -> _binding.nestedScrollView.visibility = View.GONE
+                is Result.UIModel -> {
+                    applyUiModel(result)
+                }
+            }
         }
 
         _binding.objectsGrid.adapter = DetailListAdapter()
         return _binding.root
+    }
+
+    /**
+     * Apply result to uiModel instead of ViewModel and display data.
+     */
+    private fun applyUiModel(result: Result.UIModel) {
+        _binding.uiModel = result
+        _binding.nestedScrollView.visibility = View.VISIBLE
     }
 
     /**

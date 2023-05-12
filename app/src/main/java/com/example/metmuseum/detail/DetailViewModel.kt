@@ -23,20 +23,11 @@ import java.lang.Thread.sleep
 * */
 class DetailViewModel(metId: Int) : ViewModel() {
 
-    // object fetched from the API
-    private val _metObject = MutableLiveData<MetObject>()
-    val metObject: LiveData<MetObject> = _metObject
-
-    // list of additional photos of the object
-    private val _metPhotos = MutableLiveData<List<MetPhoto>>()
-    val metPhotos: LiveData<List<MetPhoto>> = _metPhotos
-
-    // prevents displaying null values while fetching data
-    private val _isLoading = MutableLiveData<String>()
-    val isLoading: LiveData<String> = _isLoading
+    private val _result = MutableLiveData<Result>()
+    var result: LiveData<Result> = _result
 
     init {
-        _isLoading.value = "LOADING"
+        _result.value = Result.Loading
         getMetObjectById(metId)
     }
 
@@ -46,17 +37,10 @@ class DetailViewModel(metId: Int) : ViewModel() {
     private fun getMetObjectById(metId: Int) {
         viewModelScope.launch {
             try {
-                _metObject.value = MetApi.retrofitService.getObjectById(metId)
-                _isLoading.value = "NOT_LOADING"
+                _result.postValue(MetApi.retrofitService.getObjectById(metId).toUiModel())
             } catch (e: Exception) {
-                _isLoading.value = "ERROR"
+                _result.value = Result.Error
             }
-            // get list of additional images to display them in recycler view
-            val urlList = mutableListOf<MetPhoto>()
-            _metObject.value?.additionalImages?.forEachIndexed { _, url ->
-                urlList.add(MetPhoto(url))
-            }
-            _metPhotos.postValue(urlList)
         }
     }
 }
