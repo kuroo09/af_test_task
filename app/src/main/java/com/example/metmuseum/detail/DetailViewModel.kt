@@ -22,24 +22,15 @@ class DetailViewModel(metId: Int) : ViewModel() {
     /**
      * Observed LiveData that handles displaying the data that's fetched from the API.
      */
-    val result: LiveData<DetailResult> = liveData {
-        emit(DetailResult.Loading)
+    val result: LiveData<Result<DetailUiModel>> = liveData {
+        emit(Result.Loading)
         try {
-            emit(MetApi.retrofitService.getObjectById(metId).toUiModel())
+            emit(Result.Success(MetApi.retrofitService.getObjectById(metId).toUiModel()))
+            println("")
         } catch (e: Exception) {
-            emit(DetailResult.Error)
+            emit(Result.Error)
         }
     }
-
-//    val detailResult: LiveData<Result<DetailResult>> = liveData {
-//        emit(Result.Loading)
-//        try {
-//            emit(Result.Success(MetApi.retrofitService.getObjectById(metId).toUiModel()))
-//            println("")
-//        } catch (e: Exception) {
-//            emit(Result.Error)
-//        }
-//    }
 
 }
 

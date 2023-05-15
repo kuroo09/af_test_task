@@ -7,7 +7,7 @@
 
         <variable
         name="uiModel"
-        type="com.example.metmuseum.detail.DetailResult.DetailUiModel" />
+        type="com.example.metmuseum.detail.DetailUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
