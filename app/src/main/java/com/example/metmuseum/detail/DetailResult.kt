@@ -1,12 +1,14 @@
 package com.example.metmuseum.detail
 
+import com.example.metmuseum.Result
+import com.example.metmuseum.Sample
 import com.example.metmuseum.network.MetPhoto
 
 /**
  * Sealed Interface to control displaying data.
  */
-sealed interface Result {
-    data class UIModel(
+sealed interface DetailResult {
+    data class DetailUiModel(
         val imgUrl: String,
         val title: String,
         val objectDate: String,
@@ -15,9 +17,9 @@ sealed interface Result {
         val artist: String,
         val culture: String,
         val imageList: List<MetPhoto>
-    ) : Result
+    ) : DetailResult
 
-    object Loading : Result
+    object Loading : DetailResult
 
-    object Error : Result
+    object Error : DetailResult
 }

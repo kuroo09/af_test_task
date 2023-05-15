@@ -10,6 +10,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.navigation.fragment.findNavController
 import com.example.metmuseum.databinding.FragmentDetailBinding
+import com.example.metmuseum.Result
 
 class DetailFragment : Fragment() {
 
@@ -37,13 +38,24 @@ class DetailFragment : Fragment() {
 
         viewModel.result.observe(viewLifecycleOwner) { result ->
             when (result) {
-                Result.Error -> displayToast()
-                Result.Loading -> _binding.nestedScrollView.visibility = View.GONE
-                is Result.UIModel -> {
+                DetailResult.Error -> displayToast()
+                DetailResult.Loading -> _binding.nestedScrollView.visibility = View.GONE
+                is DetailResult.DetailUiModel -> {
                     applyUiModel(result)
                 }
             }
         }
+
+//        viewModel.detailResult.observe(viewLifecycleOwner) { result ->
+//            when (result) {
+//                Result.Error -> displayToast()
+//                Result.Loading -> _binding.nestedScrollView.visibility = View.GONE
+//                is Result.Success -> {
+//                    //applyUiModelData(result)
+//                }
+//            }
+//        }
+
 
         _binding.objectsGrid.adapter = DetailListAdapter()
         return _binding.root
@@ -52,10 +64,15 @@ class DetailFragment : Fragment() {
     /**
      * Apply result to uiModel instead of ViewModel and display data.
      */
-    private fun applyUiModel(result: Result.UIModel) {
+    private fun applyUiModel(result: DetailResult.DetailUiModel) {
         _binding.uiModel = result
         _binding.nestedScrollView.visibility = View.VISIBLE
     }
+
+//    private fun applyUiModelData(result: Result.Success<DetailResult>) {
+//        _binding.uiModel = result
+//        _binding.nestedScrollView.visibility = View.VISIBLE
+//    }
 
     /**
      * Display Toast when no IDs found for query.

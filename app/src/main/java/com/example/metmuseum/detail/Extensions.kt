@@ -6,9 +6,9 @@ import com.example.metmuseum.network.MetPhoto
 /**
  * Extension function to map the API result object into Result.UIModel object.
  */
-fun MetObject.toUiModel(): Result.UIModel {
+fun MetObject.toUiModel(): DetailResult.DetailUiModel {
     val imageList = additionalImages.map { MetPhoto(url = it) }
-    return Result.UIModel(
+    return DetailResult.DetailUiModel(
         imgUrl,
         title,
         objectDate,

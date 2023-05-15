@@ -6,8 +6,8 @@
     <data>
 
         <variable
-            name="uiModel"
-            type="com.example.metmuseum.detail.Result.UIModel" />
+        name="uiModel"
+        type="com.example.metmuseum.detail.DetailResult.DetailUiModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

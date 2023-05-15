@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
+import com.example.metmuseum.Result
 import com.example.metmuseum.network.MetApi
 
 
@@ -21,14 +22,25 @@ class DetailViewModel(metId: Int) : ViewModel() {
     /**
      * Observed LiveData that handles displaying the data that's fetched from the API.
      */
-    val result: LiveData<Result> = liveData {
-        emit(Result.Loading)
+    val result: LiveData<DetailResult> = liveData {
+        emit(DetailResult.Loading)
         try {
             emit(MetApi.retrofitService.getObjectById(metId).toUiModel())
         } catch (e: Exception) {
-            emit(Result.Error)
+            emit(DetailResult.Error)
         }
     }
+
+//    val detailResult: LiveData<Result<DetailResult>> = liveData {
+//        emit(Result.Loading)
+//        try {
+//            emit(Result.Success(MetApi.retrofitService.getObjectById(metId).toUiModel()))
+//            println("")
+//        } catch (e: Exception) {
+//            emit(Result.Error)
+//        }
+//    }
+
 }
 
 class DetailViewModelFactory(private val metId: Int) : ViewModelProvider.Factory {

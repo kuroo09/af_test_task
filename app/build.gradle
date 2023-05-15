@@ -3,6 +3,7 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -58,5 +59,13 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-moshi:2.9.0'
     // Coil
     implementation "io.coil-kt:coil:1.1.1"
+    // Hilt
+    implementation "com.google.dagger:hilt-android:2.44"
+    kapt "com.google.dagger:hilt-compiler:2.44"
 
+}
+
+// Allow references to generated code
+kapt {
+    correctErrorTypes true
 }
