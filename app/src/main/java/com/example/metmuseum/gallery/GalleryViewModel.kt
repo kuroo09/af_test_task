@@ -1,14 +1,13 @@
 package com.example.metmuseum.gallery
 
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.metmuseum.network.MetApi
-import com.example.metmuseum.network.MetObjectId
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import com.example.metmuseum.Result
 
 
 
@@ -19,20 +18,20 @@ import kotlinx.coroutines.launch
 * */
 class GalleryViewModel : ViewModel() {
 
-    private val _metObjectIdList = MutableLiveData<SearchResult>()
-    val metObjectIdList: LiveData<SearchResult> = _metObjectIdList
+    private val _metObjectIdList = MutableLiveData<Result<SearchModel>>()
+    val metObjectIdList: LiveData<Result<SearchModel>> = _metObjectIdList
 
     /**
      * Fetch all objects from the API that fit somehow the user input and create a list of
      * MetObjectId objects to display the result ids.
      */
     fun searchObjects(userInput: String) {
-        _metObjectIdList.value = SearchResult.Loading
+        _metObjectIdList.value = Result.Loading
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                _metObjectIdList.postValue(MetApi.retrofitService.getSearchedObjects(userInput).toSearchModel())
+                _metObjectIdList.postValue(Result.Success(MetApi.retrofitService.getSearchedObjects(userInput).toSearchModel()))
             } catch (e: Exception) {
-                _metObjectIdList.postValue(SearchResult.Error)
+                _metObjectIdList.postValue(Result.Error)
             }
         }
     }

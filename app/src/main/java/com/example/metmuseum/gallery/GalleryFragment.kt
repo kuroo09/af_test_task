@@ -13,6 +13,7 @@ import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.core.view.isInvisible
 import com.example.metmuseum.databinding.FragmentGalleryBinding
+import com.example.metmuseum.Result
 
 class GalleryFragment : Fragment() {
 
@@ -45,9 +46,9 @@ class GalleryFragment : Fragment() {
 
         viewModel.metObjectIdList.observe(viewLifecycleOwner){ result ->
             when (result) {
-                SearchResult.Error -> displayToast()
-                SearchResult.Loading -> _binding.loadingView.visibility = View.VISIBLE
-                is SearchResult.SearchModel -> applyUiModel(result)
+                Result.Error -> displayToast()
+                Result.Loading -> _binding.loadingView.visibility = View.VISIBLE
+                is Result.Success -> applyUiModel(result.data)
             }
         }
 
@@ -61,7 +62,7 @@ class GalleryFragment : Fragment() {
         Toast.makeText(context, "No objects found.", LENGTH_SHORT).show()
     }
 
-    private fun applyUiModel(result: SearchResult.SearchModel) {
+    private fun applyUiModel(result: SearchModel) {
         _binding.apply {
             viewModel = result
             loadingView.visibility = View.GONE
