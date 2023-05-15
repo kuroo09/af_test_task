@@ -14,7 +14,9 @@ import android.widget.Toast.LENGTH_SHORT
 import androidx.core.view.isInvisible
 import com.example.metmuseum.databinding.FragmentGalleryBinding
 import com.example.metmuseum.Result
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
     private val viewModel: GalleryViewModel by viewModels()
