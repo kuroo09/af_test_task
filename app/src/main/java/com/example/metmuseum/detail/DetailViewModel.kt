@@ -1,62 +1,45 @@
 package com.example.metmuseum.detail
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.NavController
-import com.example.metmuseum.network.MetApi
-import com.example.metmuseum.network.MetObject
-import com.example.metmuseum.network.MetPhoto
-import kotlinx.coroutines.launch
-import java.lang.Thread.sleep
+import androidx.lifecycle.liveData
+import com.example.metmuseum.Result
+import com.example.metmuseum.network.MetApiService
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-class DetailViewModel(metId: Int) : ViewModel() {
 
-    // object fetched from the API
-    private val _metObject = MutableLiveData<MetObject>()
-    val metObject: LiveData<MetObject> = _metObject
-
-    // list of additional photos of the object
-    private val _metPhotos = MutableLiveData<List<MetPhoto>>()
-    val metPhotos: LiveData<List<MetPhoto>> = _metPhotos
-
-    // prevents displaying null values while fetching data
-    private val _isLoading = MutableLiveData<String>()
-    val isLoading: LiveData<String> = _isLoading
-
-    init {
-        _isLoading.value = "LOADING"
-        getMetObjectById(metId)
-    }
+/*
+* TODOs
+* 1-) Convert 3 observation to single one with power of sealed class -> DONE
+* 2-) use livedata builder -> DONE
+* 3-) get rid of isLoading as string. Instead, use objects (result of 1. action will cover this one) -> DONE
+* 4-) Use Ui object instead of directly accessing the api result -> DONE
+* 5-) Use shared Result class
+*
+* */
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
+    private val metApi: MetApiService
+) : ViewModel() {
 
     /**
-     * Fetch object information data from the API by passing the tapped ID to the query.
+     * Observed LiveData that handles displaying the data that's fetched from the API.
      */
-    private fun getMetObjectById(metId: Int) {
-        viewModelScope.launch {
-            try {
-                _metObject.value = MetApi.retrofitService.getObjectById(metId)
-                _isLoading.value = "NOT_LOADING"
-            } catch (e: Exception) {
-                _isLoading.value = "ERROR"
-            }
-            // get list of additional images to display them in recycler view
-            val urlList = mutableListOf<MetPhoto>()
-            _metObject.value?.additionalImages?.forEachIndexed { _, url ->
-                urlList.add(MetPhoto(url))
-            }
-            _metPhotos.postValue(urlList)
+    val result: LiveData<Result<DetailUiModel>> = liveData {
+        emit(Result.Loading)
+        try {
+            emit(Result.Success(metApi.getObjectById(getSafeMetId()).toUiModel()))
+            println("")
+        } catch (e: Exception) {
+            emit(Result.Error)
         }
     }
-}
 
-class DetailViewModelFactory(private val metId: Int) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(metId) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+    private fun getSafeMetId(): Int {
+        return savedStateHandle.get<Int>("metId")
+            ?: throw IllegalArgumentException("metId can not be null")
     }
 }
