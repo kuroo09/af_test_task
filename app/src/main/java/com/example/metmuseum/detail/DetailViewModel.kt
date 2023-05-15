@@ -1,11 +1,13 @@
 package com.example.metmuseum.detail
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.example.metmuseum.Result
-import com.example.metmuseum.network.MetApi
+import com.example.metmuseum.network.MetApiService
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
 
 /*
@@ -17,7 +19,11 @@ import com.example.metmuseum.network.MetApi
 * 5-) Use shared Result class
 *
 * */
-class DetailViewModel(metId: Int) : ViewModel() {
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
+    private val metApi: MetApiService
+) : ViewModel() {
 
     /**
      * Observed LiveData that handles displaying the data that's fetched from the API.
@@ -25,20 +31,15 @@ class DetailViewModel(metId: Int) : ViewModel() {
     val result: LiveData<Result<DetailUiModel>> = liveData {
         emit(Result.Loading)
         try {
-            emit(Result.Success(MetApi.retrofitService.getObjectById(metId).toUiModel()))
+            emit(Result.Success(metApi.getObjectById(getSafeMetId()).toUiModel()))
             println("")
         } catch (e: Exception) {
             emit(Result.Error)
         }
     }
 
-}
-
-class DetailViewModelFactory(private val metId: Int) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(DetailViewModel::class.java)) {
-            return DetailViewModel(metId) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
+    private fun getSafeMetId(): Int {
+        return savedStateHandle.get<Int>("metId")
+            ?: throw IllegalArgumentException("metId can not be null")
     }
 }

@@ -8,25 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
+import androidx.fragment.app.viewModels
+import androidx.navigation.NavArgs
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.example.metmuseum.databinding.FragmentDetailBinding
 import com.example.metmuseum.Result
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class DetailFragment : Fragment() {
-
-
     /*
     * TODOs
     * 1-) convert lateinits to lazy -> DONE
     * Questions: lazy init of _binding?
     * */
 
-    private val viewModel: DetailViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory)[DetailViewModel::class.java]
-    }
-    private val viewModelFactory: DetailViewModelFactory by lazy {
-        DetailViewModelFactory(DetailFragmentArgs.fromBundle(requireArguments()).metId)
-    }
+    private val viewModel: DetailViewModel by viewModels()
+
     private lateinit var _binding: FragmentDetailBinding
 
     override fun onCreateView(
