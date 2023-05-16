@@ -1,5 +1,6 @@
 package com.example.metmuseum.gallery
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,9 +13,13 @@ import android.widget.SearchView
 import android.widget.Toast
 import android.widget.Toast.LENGTH_SHORT
 import androidx.core.view.isInvisible
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import com.example.metmuseum.databinding.FragmentGalleryBinding
 import com.example.metmuseum.Result
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment() {
@@ -33,7 +38,7 @@ class GalleryFragment : Fragment() {
         // Handle SearchView actions.
         _binding.searchField.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-                p0?.let { viewModel.searchObjects(p0) }
+                p0?.let { viewModel.onSearchSubmit(p0) }
                 // hide keyboard on submit
                 val inputMethodManager = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(_binding.searchField.windowToken, 0)
@@ -46,11 +51,15 @@ class GalleryFragment : Fragment() {
             }
         })
 
-        viewModel.metObjectIdList.observe(viewLifecycleOwner){ result ->
-            when (result) {
-                Result.Error -> displayToast()
-                Result.Loading -> _binding.loadingView.visibility = View.VISIBLE
-                is Result.Success -> applyUiModel(result.data)
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.dataFlow.collect { result ->
+                    when (result) {
+                        Result.Error -> displayToast()
+                        Result.Loading -> _binding.loadingView.visibility = View.VISIBLE
+                        is Result.Success -> applyUiModel(result.data)
+                    }
+                }
             }
         }
 
