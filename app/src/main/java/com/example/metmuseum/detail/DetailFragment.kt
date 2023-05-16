@@ -1,6 +1,5 @@
 package com.example.metmuseum.detail
 
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,12 +8,14 @@ import android.view.ViewGroup
 import android.widget.Toast
 import android.widget.Toast.LENGTH_LONG
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavArgs
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.fragment.navArgs
 import com.example.metmuseum.databinding.FragmentDetailBinding
 import com.example.metmuseum.Result
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -35,18 +36,26 @@ class DetailFragment : Fragment() {
 
         _binding.lifecycleOwner = this
 
-        viewModel.result.observe(viewLifecycleOwner) { result ->
-            when (result) {
-                Result.Error -> displayToast()
-                Result.Loading -> _binding.nestedScrollView.visibility = View.GONE
-                is Result.Success -> {
-                    applyUiModel(result.data)
-                }
-            }
-        }
+        observeResultData()
 
         _binding.objectsGrid.adapter = DetailListAdapter()
         return _binding.root
+    }
+
+    private fun observeResultData() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.result.collect { result ->
+                    when (result) {
+                        Result.Error -> displayToast()
+                        Result.Loading -> _binding.nestedScrollView.visibility = View.GONE
+                        is Result.Success -> {
+                            applyUiModel(result.data)
+                        }
+                    }
+                }
+            }
+        }
     }
 
     /**

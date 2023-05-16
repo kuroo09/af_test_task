@@ -8,4 +8,6 @@ import com.example.metmuseum.network.MetObjectId
 @JvmInline
 value class SearchModel(
     val ids: List<MetObjectId>
-)
+) {
+    companion object { val empty = SearchModel(ids = listOf())}
+}

@@ -1,12 +1,15 @@
 package com.example.metmuseum.detail
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.example.metmuseum.Result
 import com.example.metmuseum.network.MetApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 
@@ -28,7 +31,7 @@ class DetailViewModel @Inject constructor(
     /**
      * Observed LiveData that handles displaying the data that's fetched from the API.
      */
-    val result: LiveData<Result<DetailUiModel>> = liveData {
+    val result: StateFlow<Result<DetailUiModel>> = flow {
         emit(Result.Loading)
         try {
             emit(Result.Success(metApi.getObjectById(getSafeMetId()).toUiModel()))
@@ -36,7 +39,11 @@ class DetailViewModel @Inject constructor(
         } catch (e: Exception) {
             emit(Result.Error)
         }
-    }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = Result.Loading
+    )
 
     private fun getSafeMetId(): Int {
         return savedStateHandle.get<Int>("metId")
