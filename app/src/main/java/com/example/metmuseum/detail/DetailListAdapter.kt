@@ -6,12 +6,12 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.metmuseum.databinding.GridViewItemBinding
-import com.example.metmuseum.network.MetPhoto
+import com.example.met_api.model.MetPhoto
 
 /**
  * Adapter class that handles the RecyclerView on Detail screen.
  */
-class DetailListAdapter : ListAdapter<MetPhoto, DetailListAdapter.MetPhotoViewHolder>(DiffCallback) {
+class DetailListAdapter : ListAdapter<com.example.met_api.model.MetPhoto, DetailListAdapter.MetPhotoViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -30,17 +30,17 @@ class DetailListAdapter : ListAdapter<MetPhoto, DetailListAdapter.MetPhotoViewHo
     }
 
     class MetPhotoViewHolder(private var binding: GridViewItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(metPhoto: MetPhoto) {
+        fun bind(metPhoto: com.example.met_api.model.MetPhoto) {
             binding.objectImage = metPhoto
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MetPhoto>() {
-        override fun areItemsTheSame(oldItem: MetPhoto, newItem: MetPhoto): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<com.example.met_api.model.MetPhoto>() {
+        override fun areItemsTheSame(oldItem: com.example.met_api.model.MetPhoto, newItem: com.example.met_api.model.MetPhoto): Boolean {
             return oldItem == newItem
         }
-        override fun areContentsTheSame(oldItem: MetPhoto, newItem: MetPhoto): Boolean {
+        override fun areContentsTheSame(oldItem: com.example.met_api.model.MetPhoto, newItem: com.example.met_api.model.MetPhoto): Boolean {
             return oldItem.url == newItem.url
         }
 

@@ -1,7 +1,6 @@
-package com.example.metmuseum.di
+package com.example.met_api.di
 
-import com.example.metmuseum.network.BASE_URL
-import com.example.metmuseum.network.MetApiService
+import com.example.met_api.MetApiService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -14,7 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object AppModule {
+object ApiModule {
 
     @Provides
     @Singleton
@@ -29,7 +28,7 @@ object AppModule {
     fun provideMetApiRetrofit(moshi: Moshi): MetApiService {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
-            .baseUrl(BASE_URL)
+            .baseUrl(com.example.met_api.BASE_URL)
             .build()
             .create(MetApiService::class.java)
     }

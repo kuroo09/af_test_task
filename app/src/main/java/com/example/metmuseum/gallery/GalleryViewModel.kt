@@ -4,7 +4,7 @@ package com.example.metmuseum.gallery
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.metmuseum.Result
-import com.example.metmuseum.network.MetApiService
+import com.example.met_api.MetApiService
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,7 +21,7 @@ import javax.inject.Inject
 * */
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-    private val metApi: MetApiService
+    private val metApi: com.example.met_api.MetApiService
 ) : ViewModel() {
 
     private val refreshTrigger = MutableSharedFlow<String>(replay = 1)

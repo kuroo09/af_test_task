@@ -1,5 +1,7 @@
-package com.example.metmuseum.network
+package com.example.met_api
 
+import com.example.met_api.model.MetCollectionObject
+import com.example.met_api.model.MetObject
 import retrofit2.http.GET
 import retrofit2.http.Path
 import retrofit2.http.Query

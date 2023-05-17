@@ -9,10 +9,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.metmuseum.R
 import com.example.metmuseum.databinding.ListViewItemBinding
-import com.example.metmuseum.network.MetObjectId
+import com.example.met_api.model.MetObjectId
 
 class ObjectListAdapter :
-    ListAdapter<MetObjectId, ObjectListAdapter.MetObjectViewHolder>(DiffCallback) {
+    ListAdapter<com.example.met_api.model.MetObjectId, ObjectListAdapter.MetObjectViewHolder>(DiffCallback) {
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -43,19 +43,19 @@ class ObjectListAdapter :
     class MetObjectViewHolder(private var binding: ListViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(MetObjectId: MetObjectId) {
+        fun bind(MetObjectId: com.example.met_api.model.MetObjectId) {
             // Bind for displaying list_view_item.
             binding.idViewModel = MetObjectId
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<MetObjectId>() {
-        override fun areItemsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<com.example.met_api.model.MetObjectId>() {
+        override fun areItemsTheSame(oldItem: com.example.met_api.model.MetObjectId, newItem: com.example.met_api.model.MetObjectId): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
+        override fun areContentsTheSame(oldItem: com.example.met_api.model.MetObjectId, newItem: com.example.met_api.model.MetObjectId): Boolean {
             return oldItem.id == newItem.id
         }
 

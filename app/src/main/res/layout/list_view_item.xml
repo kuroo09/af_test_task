@@ -6,7 +6,7 @@
     <data>
         <variable
             name="idViewModel"
-            type="com.example.metmuseum.network.MetObjectId" />
+            type="com.example.met_api.model.MetObjectId" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

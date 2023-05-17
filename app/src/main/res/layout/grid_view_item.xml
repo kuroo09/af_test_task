@@ -5,7 +5,7 @@
     <data>
         <variable
             name="objectImage"
-            type="com.example.metmuseum.network.MetPhoto" />
+            type="com.example.met_api.model.MetPhoto" />
     </data>
     <ImageView
         android:id="@+id/met_image"

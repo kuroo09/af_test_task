@@ -1,10 +1,10 @@
 package com.example.metmuseum.gallery
 
-import com.example.metmuseum.network.MetCollectionObject
-import com.example.metmuseum.network.MetObjectId
+import com.example.met_api.model.MetCollectionObject
+import com.example.met_api.model.MetObjectId
 
-fun MetCollectionObject.toSearchModel(): SearchModel {
-    val idList = objectIds.map { MetObjectId(id = it) }
+fun com.example.met_api.model.MetCollectionObject.toSearchModel(): SearchModel {
+    val idList = objectIds.map { com.example.met_api.model.MetObjectId(id = it) }
     return SearchModel(
         idList
     )

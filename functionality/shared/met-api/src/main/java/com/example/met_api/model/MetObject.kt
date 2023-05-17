@@ -1,4 +1,4 @@
-package com.example.metmuseum.network
+package com.example.met_api.model
 
 import com.squareup.moshi.Json
 

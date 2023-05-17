@@ -1,6 +1,6 @@
 package com.example.metmuseum.detail
 
-import com.example.metmuseum.network.MetPhoto
+import com.example.met_api.model.MetPhoto
 
 /**
  * Detail class that gets the mapped data from the APIs result.
@@ -13,5 +13,5 @@ data class DetailUiModel(
     val repository: String,
     val artist: String,
     val culture: String,
-    val imageList: List<MetPhoto>
+    val imageList: List<com.example.met_api.model.MetPhoto>
 )
