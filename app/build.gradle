@@ -66,6 +66,8 @@ dependencies {
 
     api project(":functionality:shared:met-api")
 
+    api project (":functionality:search")
+
 }
 
 // Allow references to generated code

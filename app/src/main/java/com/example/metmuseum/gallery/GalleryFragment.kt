@@ -63,7 +63,7 @@ class GalleryFragment : Fragment() {
         Toast.makeText(context, "No objects found.", LENGTH_SHORT).show()
     }
 
-    private fun applyUiModel(result: SearchModel) {
+    private fun applyUiModel(result: com.example.entities.SearchModel) {
         _binding.apply {
             viewModel = result
             loadingView.visibility = View.GONE

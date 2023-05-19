@@ -1,4 +1,4 @@
-package com.example.metmuseum.gallery
+package com.example.entities
 
 import com.example.met_api.model.MetObjectId
 
@@ -9,5 +9,5 @@ import com.example.met_api.model.MetObjectId
 value class SearchModel(
     val ids: List<com.example.met_api.model.MetObjectId>
 ) {
-    companion object { val empty = SearchModel(ids = listOf())}
+    companion object { val empty = SearchModel(ids = listOf()) }
 }

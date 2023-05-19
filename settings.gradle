@@ -17,3 +17,5 @@ include ':app'
 
 include ':functionality:shared'
 include ':functionality:shared:met-api'
+include ':functionality:search'
+include ':functionality:search:entities'

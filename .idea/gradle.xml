@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/functionality" />
+            <option value="$PROJECT_DIR$/functionality/search" />
+            <option value="$PROJECT_DIR$/functionality/search/entities" />
             <option value="$PROJECT_DIR$/functionality/shared" />
             <option value="$PROJECT_DIR$/functionality/shared/met-api" />
           </set>

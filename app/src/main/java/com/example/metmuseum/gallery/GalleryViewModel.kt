@@ -3,8 +3,9 @@ package com.example.metmuseum.gallery
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.entities.SearchModel.Companion.empty
 import com.example.metmuseum.Result
-import com.example.met_api.MetApiService
+import com.example.search.SearchArtUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -21,7 +22,7 @@ import javax.inject.Inject
 * */
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-    private val metApi: com.example.met_api.MetApiService
+    private val searchArtUseCase: SearchArtUseCase
 ) : ViewModel() {
 
     private val refreshTrigger = MutableSharedFlow<String>(replay = 1)
@@ -30,7 +31,7 @@ class GalleryViewModel @Inject constructor(
         .stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(),
-            initialValue = Result.Success(SearchModel.empty)
+            initialValue = Result.Success(empty)
         )
 
     fun onSearchSubmit(userInput: String) {
@@ -44,7 +45,7 @@ class GalleryViewModel @Inject constructor(
     private suspend fun searchObjects(userInput: String) = flow {
         emit(Result.Loading)
         try {
-            emit(Result.Success(metApi.getSearchedObjects(userInput).toSearchModel()))
+            emit(Result.Success(searchArtUseCase(userInput).toSearchModel()))
         } catch (e: Exception) {
             emit(Result.Error)
         }

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.example.metmuseum.gallery.SearchModel" />
+            type="com.example.entities.SearchModel" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
