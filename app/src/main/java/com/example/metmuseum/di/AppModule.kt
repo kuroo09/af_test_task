@@ -11,6 +11,9 @@ import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
+import com.example.metmuseum.network.MetApi
+import com.example.metmuseum.network.MetApiImpl
+import dagger.Binds
 
 @Module
 @InstallIn(SingletonComponent::class)

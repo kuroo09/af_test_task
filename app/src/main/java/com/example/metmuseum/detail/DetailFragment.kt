@@ -50,7 +50,7 @@ class DetailFragment : Fragment() {
                         Result.Error -> displayToast()
                         Result.Loading -> _binding.nestedScrollView.visibility = View.GONE
                         is Result.Success -> {
-                            applyUiModel(result.data)
+                            applyUiModel(result.data as DetailUiModel)
                         }
                     }
                 }

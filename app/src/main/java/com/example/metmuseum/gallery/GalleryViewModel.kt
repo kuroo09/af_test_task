@@ -21,7 +21,7 @@ import javax.inject.Inject
 * */
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
-    private val metApi: MetApiService
+    private val metApiService: MetApiService
 ) : ViewModel() {
 
     private val refreshTrigger = MutableSharedFlow<String>(replay = 1)
@@ -44,7 +44,7 @@ class GalleryViewModel @Inject constructor(
     private suspend fun searchObjects(userInput: String) = flow {
         emit(Result.Loading)
         try {
-            emit(Result.Success(metApi.getSearchedObjects(userInput).toSearchModel()))
+            emit(Result.Success(metApiService.getSearchedObjects(userInput).toSearchModel()))
         } catch (e: Exception) {
             emit(Result.Error)
         }
