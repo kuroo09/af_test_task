@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.metmuseum.databinding.GridViewItemBinding
+import com.example.detail.databinding.GridViewItemBinding
 import com.example.met_api.model.MetPhoto
 
 /**

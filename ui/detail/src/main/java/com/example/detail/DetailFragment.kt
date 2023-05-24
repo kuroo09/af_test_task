@@ -12,10 +12,10 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.metmuseum.databinding.FragmentDetailBinding
+import com.example.detail.databinding.FragmentDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.metmuseum.Result
+import com.example.met_api.Result
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {

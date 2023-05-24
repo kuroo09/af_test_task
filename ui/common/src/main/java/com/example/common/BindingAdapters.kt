@@ -1,14 +1,11 @@
-package com.example.metmuseum
+package com.example.common
 
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.metmuseum.detail.DetailListAdapter
-import com.example.metmuseum.gallery.ObjectListAdapter
-import com.example.met_api.model.MetObjectId
-import com.example.met_api.model.MetPhoto
 
 /**
  * BindingAdapter for ImageView to display image from received URL, a loading animation while URL
@@ -30,8 +27,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
  * BindingAdapter for binding a list of IDs to the RecyclerView.
  */
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<com.example.met_api.model.MetObjectId>?) {
-    val adapter = recyclerView.adapter as ObjectListAdapter
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<com.example.met_api.BaseItem>?) {
+    val adapter = recyclerView.adapter as ListAdapter<com.example.met_api.BaseItem,*>
     adapter.submitList(data)
 }
 
@@ -39,8 +36,8 @@ fun bindRecyclerView(recyclerView: RecyclerView, data: List<com.example.met_api.
  * BindingAdapter for binding a list of additional images to the RecyclerView.
  */
 @BindingAdapter("listData")
-fun bindRecyclerViewDetail(recyclerView: RecyclerView, data: List<com.example.met_api.model.MetPhoto>?) {
-    val adapter = recyclerView.adapter as DetailListAdapter
+fun bindRecyclerViewDetail(recyclerView: RecyclerView, data: List<com.example.met_api.BaseItem>?) {
+    val adapter = recyclerView.adapter as ListAdapter<com.example.met_api.BaseItem,*>
     adapter.submitList(data)
 }
 

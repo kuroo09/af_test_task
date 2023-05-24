@@ -4,7 +4,6 @@ package com.example.search.state
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entities.SearchModel.Companion.empty
-import com.example.metmuseum.Result
 import com.example.search.toSearchModel
 import com.example.search.SearchArtUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -14,6 +13,7 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
+import com.example.met_api.Result
 
 
 /*

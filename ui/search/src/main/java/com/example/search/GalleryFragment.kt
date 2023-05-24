@@ -15,10 +15,11 @@ import androidx.core.view.isInvisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.metmuseum.databinding.FragmentGalleryBinding
+import com.example.entities.SearchModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.metmuseum.Result
+import com.example.search.databinding.FragmentGalleryBinding
+import com.example.met_api.Result
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment() {
@@ -63,7 +64,7 @@ class GalleryFragment : Fragment() {
         Toast.makeText(context, "No objects found.", LENGTH_SHORT).show()
     }
 
-    private fun applyUiModel(result: com.example.entities.SearchModel) {
+    private fun applyUiModel(result: SearchModel) {
         _binding.apply {
             viewModel = result
             loadingView.visibility = View.GONE

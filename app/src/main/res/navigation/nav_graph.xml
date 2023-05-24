@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/galleryFragment"
-        android:name="com.example.metmuseum.gallery.GalleryFragment"
+        android:name="com.example.search.GalleryFragment"
         android:label="@string/app_name" >
         <action
             android:id="@+id/action_galleryFragment_to_detailFragment"
@@ -14,7 +14,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.example.metmuseum.detail.DetailFragment"
+        android:name="com.example.detail.DetailFragment"
         android:label="@string/app_name" >
         <argument
             android:name="metId"

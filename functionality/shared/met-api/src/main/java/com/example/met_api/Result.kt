@@ -1,4 +1,4 @@
-package com.example.metmuseum
+package com.example.met_api
 
 /**
  * Interface for handling displaying LiveData.

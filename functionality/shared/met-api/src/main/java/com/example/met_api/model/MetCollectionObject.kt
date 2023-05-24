@@ -1,5 +1,7 @@
 package com.example.met_api.model
 
+import com.example.met_api.BaseItem
+
 import com.squareup.moshi.Json
 
 //TODO convert suitable classes to value class -> DONE
@@ -15,15 +17,13 @@ data class MetCollectionObject(
 /**
  * Object for the IDs from the list of MetCollectionObject to display in RecyclerView.
  */
-@JvmInline
-value class MetObjectId(
+ class MetObjectId(
     val id: Int
-)
+): BaseItem()
 
 /**
  * Object for URLs of additional images to display them in RecyclerView.
  */
-@JvmInline
-value class MetPhoto(
+class MetPhoto(
     val url: String
-)
+): BaseItem()

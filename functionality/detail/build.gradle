@@ -30,6 +30,9 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        dataBinding true
+    }
 }
 
 dependencies {
@@ -45,5 +48,5 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     api project (":functionality:shared:met-api")
-    api project (':app')
+
 }

@@ -7,9 +7,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.metmuseum.databinding.ListViewItemBinding
 import com.example.met_api.model.MetObjectId
-import com.example.metmuseum.gallery.GalleryFragmentDirections
+import com.example.search.databinding.ListViewItemBinding
 
 class ObjectListAdapter :
     ListAdapter<MetObjectId, ObjectListAdapter.MetObjectViewHolder>(
@@ -32,7 +31,7 @@ class ObjectListAdapter :
         val metObject = getItem(position)
         holder.bind(metObject)
 
-        val idView = holder.itemView.findViewById<TextView>(com.example.metmuseum.R.id.met_id)
+        val idView = holder.itemView.findViewById<TextView>(R.id.met_id)
         idView.setOnClickListener {
             val action = GalleryFragmentDirections.actionGalleryFragmentToDetailFragment(
                 idView.text.toString().toInt()
