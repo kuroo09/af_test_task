@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/functionality/search/entities" />
             <option value="$PROJECT_DIR$/functionality/shared" />
             <option value="$PROJECT_DIR$/functionality/shared/met-api" />
+            <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/common" />
             <option value="$PROJECT_DIR$/ui/detail" />

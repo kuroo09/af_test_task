@@ -1,4 +1,4 @@
-package com.example.detail
+package com.example.detail_ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -12,7 +12,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
-import com.example.detail.databinding.FragmentDetailBinding
+import com.example.detail_ui.databinding.FragmentDetailBinding
+import com.example.detail_ui.state.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import com.example.met_api.Result
@@ -25,7 +26,7 @@ class DetailFragment : Fragment() {
     * Questions: lazy init of _binding?
     * */
 
-    private val viewModel: com.example.detail.state.DetailViewModel by viewModels()
+    private val viewModel: DetailViewModel by viewModels()
 
     private lateinit var _binding: FragmentDetailBinding
 

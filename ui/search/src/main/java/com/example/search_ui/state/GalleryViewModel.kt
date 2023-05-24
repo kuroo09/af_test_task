@@ -1,10 +1,10 @@
-package com.example.search.state
+package com.example.search_ui.state
 
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.entities.SearchModel.Companion.empty
-import com.example.search.toSearchModel
+import com.example.search_ui.toSearchModel
 import com.example.search.SearchArtUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableSharedFlow

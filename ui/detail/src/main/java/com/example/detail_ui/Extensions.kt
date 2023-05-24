@@ -1,4 +1,4 @@
-package com.example.detail
+package com.example.detail_ui
 
 import com.example.entities.DetailUiModel
 

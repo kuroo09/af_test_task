@@ -1,11 +1,11 @@
-package com.example.detail.state
+package com.example.detail_ui.state
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.detail.GetDetailsUseCase
 import com.example.met_api.Result
-import com.example.detail.toUiModel
+import com.example.detail_ui.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

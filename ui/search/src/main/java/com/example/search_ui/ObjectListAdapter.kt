@@ -1,4 +1,4 @@
-package com.example.search
+package com.example.search_ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -8,7 +8,8 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.met_api.model.MetObjectId
-import com.example.search.databinding.ListViewItemBinding
+import com.example.navigation.MainNavGraphDirections
+import com.example.search_ui.databinding.ListViewItemBinding
 
 class ObjectListAdapter :
     ListAdapter<MetObjectId, ObjectListAdapter.MetObjectViewHolder>(
@@ -33,30 +34,27 @@ class ObjectListAdapter :
 
         val idView = holder.itemView.findViewById<TextView>(R.id.met_id)
         idView.setOnClickListener {
-            val action = GalleryFragmentDirections.actionGalleryFragmentToDetailFragment(
-                idView.text.toString().toInt()
-            )
+            val action = MainNavGraphDirections.actionGlobalDetailFlow(idView.text.toString().toInt())
             holder.itemView.findNavController().navigate(action)
         }
-
     }
 
     class MetObjectViewHolder(private var binding: ListViewItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(MetObjectId: com.example.met_api.model.MetObjectId) {
+        fun bind(MetObjectId: MetObjectId) {
             // Bind for displaying list_view_item.
             binding.idViewModel = MetObjectId
             binding.executePendingBindings()
         }
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<com.example.met_api.model.MetObjectId>() {
-        override fun areItemsTheSame(oldItem: com.example.met_api.model.MetObjectId, newItem: com.example.met_api.model.MetObjectId): Boolean {
+    companion object DiffCallback : DiffUtil.ItemCallback<MetObjectId>() {
+        override fun areItemsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: com.example.met_api.model.MetObjectId, newItem: com.example.met_api.model.MetObjectId): Boolean {
+        override fun areContentsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
             return oldItem.id == newItem.id
         }
 

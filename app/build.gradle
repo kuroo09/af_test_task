@@ -65,7 +65,9 @@ dependencies {
     kapt "com.google.dagger:hilt-compiler:2.44"
 
     api project (":ui:common")
-
+    api project(':ui:search')
+    api project(':ui:detail')
+    api project (":navigation")
 }
 
 // Allow references to generated code

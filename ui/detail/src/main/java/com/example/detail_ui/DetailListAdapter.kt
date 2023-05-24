@@ -1,11 +1,11 @@
-package com.example.detail
+package com.example.detail_ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.detail.databinding.GridViewItemBinding
+import com.example.detail_ui.databinding.GridViewItemBinding
 import com.example.met_api.model.MetPhoto
 
 /**

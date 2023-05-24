@@ -1,4 +1,4 @@
-package com.example.search
+package com.example.search_ui
 
 fun com.example.met_api.model.MetCollectionObject.toSearchModel(): com.example.entities.SearchModel {
     val idList = objectIds.map { com.example.met_api.model.MetObjectId(id = it) }

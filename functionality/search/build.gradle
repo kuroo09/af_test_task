@@ -50,5 +50,5 @@ dependencies {
     api project (":functionality:shared:met-api")
     api project (":functionality:search:entities")
 
-
+    api project (":navigation")
 }

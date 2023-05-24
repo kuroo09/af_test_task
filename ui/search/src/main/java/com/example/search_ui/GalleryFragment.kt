@@ -1,4 +1,4 @@
-package com.example.search
+package com.example.search_ui
 
 import android.content.Context
 import android.os.Bundle
@@ -18,13 +18,14 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.entities.SearchModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.search.databinding.FragmentGalleryBinding
 import com.example.met_api.Result
+import com.example.search_ui.databinding.FragmentGalleryBinding
+import com.example.search_ui.state.GalleryViewModel
 
 @AndroidEntryPoint
 class GalleryFragment : Fragment() {
 
-    private val viewModel: com.example.search.state.GalleryViewModel by viewModels()
+    private val viewModel: GalleryViewModel by viewModels()
     private lateinit var _binding: FragmentGalleryBinding
 
     override fun onCreateView(
