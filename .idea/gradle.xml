@@ -13,11 +13,10 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/functionality" />
             <option value="$PROJECT_DIR$/functionality/detail" />
-            <option value="$PROJECT_DIR$/functionality/detail/entities" />
             <option value="$PROJECT_DIR$/functionality/search" />
-            <option value="$PROJECT_DIR$/functionality/search/entities" />
             <option value="$PROJECT_DIR$/functionality/shared" />
-            <option value="$PROJECT_DIR$/functionality/shared/met-api" />
+            <option value="$PROJECT_DIR$/functionality/shared/data" />
+            <option value="$PROJECT_DIR$/functionality/shared/data/met-api" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/common" />

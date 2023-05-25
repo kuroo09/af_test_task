@@ -46,8 +46,8 @@ dependencies {
     // Hilt
     implementation "com.google.dagger:hilt-android:2.44"
     kapt "com.google.dagger:hilt-compiler:2.44"
+    api project(':functionality:shared:data')
 
-    api project (":functionality:shared:met-api")
 
     api project (":navigation")
 }

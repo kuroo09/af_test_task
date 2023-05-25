@@ -15,10 +15,10 @@ import androidx.core.view.isInvisible
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import com.example.entities.SearchModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.met_api.Result
+import com.example.functionality.shared.data.met_api.model.Result
+import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
 import com.example.search_ui.databinding.FragmentGalleryBinding
 import com.example.search_ui.state.GalleryViewModel
 
@@ -52,7 +52,7 @@ class GalleryFragment : Fragment() {
                     when (result) {
                         Result.Error -> displayToast()
                         Result.Loading -> _binding.loadingView.visibility = View.VISIBLE
-                        is Result.Success -> applyUiModel(result.data)
+                        is Result.Success -> applyUiModel(result.data as SearchCollectionDto)
                     }
                 }
             }
@@ -65,7 +65,7 @@ class GalleryFragment : Fragment() {
         Toast.makeText(context, "No objects found.", LENGTH_SHORT).show()
     }
 
-    private fun applyUiModel(result: SearchModel) {
+    private fun applyUiModel(result: SearchCollectionDto) {
         _binding.apply {
             viewModel = result
             loadingView.visibility = View.GONE

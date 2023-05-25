@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.met_api.model.MetObjectId
+import com.example.functionality.shared.data.met_api.model.MetObjectId
 import com.example.navigation.MainNavGraphDirections
 import com.example.search_ui.databinding.ListViewItemBinding
 

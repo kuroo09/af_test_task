@@ -1,10 +1,10 @@
 package com.example.search
 
-import com.example.met_api.MetApiService
+import com.example.met_api.MetRepository
 import javax.inject.Inject
 
 class SearchArtUseCase @Inject constructor(
-    private val metApi: MetApiService
+    private val metApi: MetRepository
 ) {
-    suspend operator fun invoke(query: String) = metApi.getSearchedObjects(query)
+    operator fun invoke(query: String) = metApi.getSearchedObjects(query)
 }

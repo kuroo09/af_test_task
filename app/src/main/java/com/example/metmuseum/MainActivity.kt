@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity(), ToFlowNavigatable {
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
-        //setupActionBarWithNavController(navController)
 
         navigator.navController = navController
 

@@ -4,25 +4,17 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.detail.GetDetailsUseCase
-import com.example.met_api.Result
-import com.example.detail_ui.toUiModel
+import com.example.functionality.shared.data.met_api.model.Result
+import com.example.functionality.shared.data.met_api.model.MetObjectDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
-
-/*
-* TODOs
-* 1-) Convert 3 observation to single one with power of sealed class -> DONE
-* 2-) use livedata builder -> DONE
-* 3-) get rid of isLoading as string. Instead, use objects (result of 1. action will cover this one) -> DONE
-* 4-) Use Ui object instead of directly accessing the api result -> DONE
-* 5-) Use shared Result class
-*
-* */
 @HiltViewModel
 class DetailViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
@@ -32,11 +24,12 @@ class DetailViewModel @Inject constructor(
     /**
      * Observed LiveData that handles displaying the data that's fetched from the API.
      */
-    val result: StateFlow<Result<com.example.entities.DetailUiModel>> = flow {
+    val result: StateFlow<Result<MetObjectDto>> = flow {
         emit(Result.Loading)
         try {
-            emit(Result.Success(getDetailUseCase(getSafeMetId()).toUiModel()))
-            println("")
+            emitAll(getDetailUseCase(getSafeMetId()).map {
+                Result.Success(it)
+            })
         } catch (e: Exception) {
             emit(Result.Error)
         }

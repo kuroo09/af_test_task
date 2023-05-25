@@ -16,7 +16,8 @@ import com.example.detail_ui.databinding.FragmentDetailBinding
 import com.example.detail_ui.state.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.met_api.Result
+import com.example.functionality.shared.data.met_api.model.Result
+import com.example.functionality.shared.data.met_api.model.MetObjectDto
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
@@ -62,7 +63,7 @@ class DetailFragment : Fragment() {
     /**
      * Apply result to uiModel instead of ViewModel and display data.
      */
-    private fun applyUiModel(result: com.example.entities.DetailUiModel) {
+    private fun applyUiModel(result: MetObjectDto) {
         _binding.uiModel = result
         _binding.nestedScrollView.visibility = View.VISIBLE
     }

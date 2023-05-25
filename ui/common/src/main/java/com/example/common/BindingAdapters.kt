@@ -6,6 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.example.functionality.shared.data.met_api.model.BaseItem
 
 /**
  * BindingAdapter for ImageView to display image from received URL, a loading animation while URL
@@ -27,17 +28,8 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
  * BindingAdapter for binding a list of IDs to the RecyclerView.
  */
 @BindingAdapter("listData")
-fun bindRecyclerView(recyclerView: RecyclerView, data: List<com.example.met_api.BaseItem>?) {
-    val adapter = recyclerView.adapter as ListAdapter<com.example.met_api.BaseItem,*>
-    adapter.submitList(data)
-}
-
-/**
- * BindingAdapter for binding a list of additional images to the RecyclerView.
- */
-@BindingAdapter("listData")
-fun bindRecyclerViewDetail(recyclerView: RecyclerView, data: List<com.example.met_api.BaseItem>?) {
-    val adapter = recyclerView.adapter as ListAdapter<com.example.met_api.BaseItem,*>
+fun bindRecyclerView(recyclerView: RecyclerView, data: List<BaseItem>?) {
+    val adapter = recyclerView.adapter as ListAdapter<BaseItem,*>
     adapter.submitList(data)
 }
 

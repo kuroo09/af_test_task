@@ -52,7 +52,6 @@ dependencies {
     implementation "androidx.navigation:navigation-ui-ktx:2.5.2"
 
     api project (":ui:common")
-    api project (":functionality:shared:met-api")
-    api project (':functionality:detail:entities')
+    api project(':functionality:shared:data')
     api project (":functionality:detail")
 }
