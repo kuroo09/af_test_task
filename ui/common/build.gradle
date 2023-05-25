@@ -47,8 +47,7 @@ dependencies {
 
     // Coil
     implementation "io.coil-kt:coil:1.1.1"
+    // Modules
     api project(':functionality:shared:data')
-
-
     api project (":navigation")
 }
