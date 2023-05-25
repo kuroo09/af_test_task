@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+        name="uiModel"
+        type="com.example.functionality.shared.data.met_api.model.MetObjectDto" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="400dp"
+                    android:layout_margin="@dimen/detail_10"
+                    android:scaleType="fitCenter"
+                    app:imageUrl="@{uiModel.imgUrl}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@tools:sample/backgrounds/scenic" />
+
+                <TextView
+                    android:id="@+id/titleView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/detail_10"
+                    android:layout_marginTop="@dimen/detail_10"
+                    android:paddingEnd="@dimen/detail_10"
+                    android:text="@{uiModel.title}"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    tools:text="Object Name" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/infoView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="@dimen/detail_10"
+                    app:layout_constraintStart_toStartOf="@id/titleView"
+                    app:layout_constraintTop_toBottomOf="@id/titleView">
+
+                    <TextView
+                        android:id="@+id/artistView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_10"
+                        android:layout_marginRight="@dimen/detail_10"
+                        android:text="@{uiModel.artist}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintWidth_max="220dp"
+                        tools:text="Artist is a cool definition of what a creator of creative art is" />
+
+                    <TextView
+                        android:id="@+id/dateView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="@dimen/detail_10"
+                        android:text="@{uiModel.objectDate}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@+id/artistView"
+                        app:layout_constraintWidth_max="150dp"
+                        tools:text="Time when the crazy Object in the picture above was created" />
+
+                    <TextView
+                        android:id="@+id/cultureView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/detail_8"
+                        android:text="@{uiModel.culture}"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/artistView"
+                        app:layout_constraintWidth_max="220dp"
+                        tools:text="Culture" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                <TextView
+                    android:id="@+id/departmentView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_14"
+                    android:text="@{uiModel.department}"
+                    app:layout_constraintStart_toStartOf="@+id/titleView"
+                    app:layout_constraintTop_toBottomOf="@+id/infoView"
+                    tools:text="Department" />
+
+                <TextView
+                    android:id="@+id/repoView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_8"
+                    android:text="@{uiModel.repository}"
+                    app:layout_constraintStart_toStartOf="@+id/titleView"
+                    app:layout_constraintTop_toBottomOf="@+id/departmentView"
+                    tools:text="Repository" />
+
+                <TextView
+                    android:id="@+id/morePhotosView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/detail_14"
+                    android:text="@{uiModel.imageList.isEmpty() ? `No more pictures available` : @string/more_pictures}"
+                    app:layout_constraintStart_toStartOf="@+id/titleView"
+                    app:layout_constraintTop_toBottomOf="@+id/repoView"
+                    tools:text="More Pictures:" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/objects_grid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:orientation="horizontal"
+                    android:padding="6dp"
+                    android:scrollbars="horizontal"
+                    app:listData="@{uiModel.imageList}"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintHeight_min="200dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/morePhotosView"
+
+                    tools:itemCount="16"
+                    tools:listitem="@layout/grid_view_item" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

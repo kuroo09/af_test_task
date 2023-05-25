@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="com.example.functionality.shared.data.met_api.model.SearchCollectionDto" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <SearchView
+            android:id="@+id/search_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:inputType="text"
+            android:queryHint="@string/search_hint"
+            android:iconifiedByDefault="false"
+            android:focusable="false"
+            android:focusableInTouchMode="true"
+            app:layout_constraintBottom_toTopOf="@+id/objects_list"
+            app:layout_constraintEnd_toEndOf="@+id/objects_list"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/loadingView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="fitCenter"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/search_field"
+            android:src="@drawable/loading_animation"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/objects_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="6dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_field"
+            app:listData="@{viewModel.ids}"
+            tools:itemCount="16"
+            tools:listitem="@layout/list_view_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

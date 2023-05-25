@@ -14,3 +14,14 @@ dependencyResolutionManagement {
 }
 rootProject.name = "METMuseum"
 include ':app'
+
+include ':functionality:shared'
+include ':functionality:shared:data'
+include ':functionality:search'
+include ':functionality:detail'
+include ':ui'
+include ':ui:search'
+include ':ui:detail'
+include ':ui:common'
+include ':navigation'
+include ':functionality:shared:data:met-api'

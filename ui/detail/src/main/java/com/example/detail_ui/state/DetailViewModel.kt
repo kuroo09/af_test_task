@@ -1,0 +1,46 @@
+package com.example.detail_ui.state
+
+import androidx.lifecycle.SavedStateHandle
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.detail.GetDetailsUseCase
+import com.example.functionality.shared.data.met_api.model.Result
+import com.example.functionality.shared.data.met_api.model.MetObjectDto
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
+import javax.inject.Inject
+
+@HiltViewModel
+class DetailViewModel @Inject constructor(
+    private val savedStateHandle: SavedStateHandle,
+    private val getDetailUseCase: GetDetailsUseCase
+) : ViewModel() {
+
+    /**
+     * Observed LiveData that handles displaying the data that's fetched from the API.
+     */
+    val result: StateFlow<Result<MetObjectDto>> = flow {
+        emit(Result.Loading)
+        try {
+            emitAll(getDetailUseCase(getSafeMetId()).map {
+                Result.Success(it)
+            })
+        } catch (e: Exception) {
+            emit(Result.Error)
+        }
+    }.stateIn(
+        scope = viewModelScope,
+        started = SharingStarted.WhileSubscribed(),
+        initialValue = Result.Loading
+    )
+
+    private fun getSafeMetId(): Int {
+        return savedStateHandle.get<Int>("metId")
+            ?: throw IllegalArgumentException("metId can not be null")
+    }
+}
