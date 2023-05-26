@@ -16,7 +16,7 @@ import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
 import kotlinx.coroutines.flow.emitAll
 
 @HiltViewModel
-class GalleryViewModel @Inject constructor(
+class SearchViewModel @Inject constructor(
     private val searchArtUseCase: SearchArtUseCase
 ) : ViewModel() {
 

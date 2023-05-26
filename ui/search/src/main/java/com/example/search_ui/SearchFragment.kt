@@ -19,20 +19,20 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import com.example.functionality.shared.data.met_api.model.Result
 import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
-import com.example.search_ui.databinding.FragmentGalleryBinding
-import com.example.search_ui.state.GalleryViewModel
+import com.example.search_ui.databinding.FragmentSearchBinding
+import com.example.search_ui.state.SearchViewModel
 
 @AndroidEntryPoint
-class GalleryFragment : Fragment() {
+class SearchFragment : Fragment() {
 
-    private val viewModel: GalleryViewModel by viewModels()
-    private lateinit var _binding: FragmentGalleryBinding
+    private val viewModel: SearchViewModel by viewModels()
+    private lateinit var _binding: FragmentSearchBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentGalleryBinding.inflate(inflater)
+        _binding = FragmentSearchBinding.inflate(inflater)
 
         _binding.lifecycleOwner = this
 
