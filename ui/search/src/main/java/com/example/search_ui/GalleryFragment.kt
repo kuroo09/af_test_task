@@ -52,7 +52,7 @@ class GalleryFragment : Fragment() {
                     when (result) {
                         Result.Error -> displayToast()
                         Result.Loading -> _binding.loadingView.visibility = View.VISIBLE
-                        is Result.Success -> applyUiModel(result.data as SearchCollectionDto)
+                        is Result.Success -> applyUiModel(result.data)
                     }
                 }
             }
@@ -82,7 +82,7 @@ class GalleryFragment : Fragment() {
                 val inputMethodManager =
                     requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.hideSoftInputFromWindow(_binding.searchField.windowToken, 0)
-                _binding.searchField.clearFocus()   // prevents double execution of method on Enter key
+                _binding.searchField.clearFocus()   // does not prevents double execution of method on Enter key
                 return true
             }
 

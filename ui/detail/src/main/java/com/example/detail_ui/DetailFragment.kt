@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toast.LENGTH_LONG
+import android.widget.Toast.LENGTH_SHORT
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -21,11 +21,6 @@ import com.example.functionality.shared.data.met_api.model.MetObjectDto
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {
-    /*
-    * TODOs
-    * 1-) convert lateinits to lazy -> DONE
-    * Questions: lazy init of _binding?
-    * */
 
     private val viewModel: DetailViewModel by viewModels()
 
@@ -74,6 +69,6 @@ class DetailFragment : Fragment() {
     private fun displayToast() {
         val navController = findNavController()
         navController.popBackStack()
-        Toast.makeText(context, "Object currently not available.", LENGTH_LONG).show()
+        Toast.makeText(context, "Object currently not available.", LENGTH_SHORT).show()
     }
 }

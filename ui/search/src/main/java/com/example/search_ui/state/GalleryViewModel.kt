@@ -14,7 +14,6 @@ import javax.inject.Inject
 import com.example.functionality.shared.data.met_api.model.Result
 import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
 import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.map
 
 @HiltViewModel
 class GalleryViewModel @Inject constructor(
@@ -41,14 +40,7 @@ class GalleryViewModel @Inject constructor(
      * MetObjectId objects to display the result ids.
      */
     private suspend fun searchObjects(userInput: String) = flow {
-        emit(Result.Loading)
-        try {
-            emitAll(searchArtUseCase(userInput).map {
-                Result.Success(it)
-            })
-        } catch (e: Exception) {
-            emit(Result.Error)
-        }
+        emitAll(searchArtUseCase(userInput))
     }
 
 }

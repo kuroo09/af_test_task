@@ -11,7 +11,6 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.emitAll
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -25,14 +24,7 @@ class DetailViewModel @Inject constructor(
      * Observed LiveData that handles displaying the data that's fetched from the API.
      */
     val result: StateFlow<Result<MetObjectDto>> = flow {
-        emit(Result.Loading)
-        try {
-            emitAll(getDetailUseCase(getSafeMetId()).map {
-                Result.Success(it)
-            })
-        } catch (e: Exception) {
-            emit(Result.Error)
-        }
+        emitAll(getDetailUseCase(getSafeMetId()))
     }.stateIn(
         scope = viewModelScope,
         started = SharingStarted.WhileSubscribed(),
