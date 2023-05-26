@@ -1,5 +1,6 @@
 package com.example.met_api
 
+import com.example.functionality.shared.data.abstractions.MetRepository
 import com.example.functionality.shared.data.met_api.model.MetObjectDto
 import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
 import kotlinx.coroutines.Dispatchers
@@ -18,6 +19,4 @@ class MetRepositoryImpl @Inject constructor(
     override fun getSearchedObjects(query: String): Flow<SearchCollectionDto> {
         return metApi.getSearchedObjects(query).flowOn(Dispatchers.IO)
     }
-
-
 }

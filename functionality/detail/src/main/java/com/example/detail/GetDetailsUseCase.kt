@@ -1,13 +1,10 @@
 package com.example.detail
 
-import com.example.functionality.shared.data.met_api.model.Result
-import com.example.met_api.MetRepository
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
+import com.example.functionality.shared.data.abstractions.MetRepository
 import javax.inject.Inject
 
 class GetDetailsUseCase @Inject constructor(
-    private val metApi: MetRepository
+    private val metApi: com.example.functionality.shared.data.abstractions.MetRepository
 ) {
     operator fun invoke(id: Int) = metApi.getObjectById(id)
 }

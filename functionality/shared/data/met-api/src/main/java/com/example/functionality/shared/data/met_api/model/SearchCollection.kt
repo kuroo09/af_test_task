@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 /**
  * Object fetched from the API that holds a list of IDs fitting the search term.
  */
-data class SearchCollection(
+internal data class SearchCollection(
     val total: Int,
     @Json(name = "objectIDs") val objectIds: List<Int>
 )
@@ -20,7 +20,7 @@ value class SearchCollectionDto(
 }
 
 
-fun SearchCollection.toDto(): SearchCollectionDto {
+internal fun SearchCollection.toDto(): SearchCollectionDto {
     val idList = objectIds.map { MetObjectId(id = it) }
     return SearchCollectionDto(
         idList

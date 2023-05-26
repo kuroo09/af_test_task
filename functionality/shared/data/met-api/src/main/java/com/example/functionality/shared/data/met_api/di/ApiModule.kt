@@ -11,6 +11,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import javax.inject.Singleton
 import com.example.functionality.shared.data.met_api.BASE_URL
+import com.example.functionality.shared.data.met_api.MetApiHelper
+import com.example.functionality.shared.data.met_api.MetApiHelperImpl
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,12 +28,18 @@ object ApiModule {
 
     @Provides
     @Singleton
-    fun provideMetApiRetrofit(moshi: Moshi): MetApiService {
+    internal fun provideMetApiRetrofit(moshi: Moshi): MetApiService {
         return Retrofit.Builder()
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .baseUrl(BASE_URL)
             .build()
             .create(MetApiService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    internal fun provideApiHelper(apiService: MetApiService): MetApiHelper {
+        return MetApiHelperImpl(apiService)
     }
 
 }

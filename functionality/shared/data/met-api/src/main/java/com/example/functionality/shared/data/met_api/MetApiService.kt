@@ -9,7 +9,7 @@ import retrofit2.http.Query
 const val BASE_URL = "https://collectionapi.metmuseum.org/public/collection/v1/"
 
 // Defines how Retrofit talks to web server using HTTP requests.
-interface MetApiService {
+internal interface MetApiService {
     /**
      * Fetches the data for requested ID from the API.
      */

@@ -16,6 +16,7 @@
             <option value="$PROJECT_DIR$/functionality/search" />
             <option value="$PROJECT_DIR$/functionality/shared" />
             <option value="$PROJECT_DIR$/functionality/shared/data" />
+            <option value="$PROJECT_DIR$/functionality/shared/data/abstractions" />
             <option value="$PROJECT_DIR$/functionality/shared/data/met-api" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/ui" />

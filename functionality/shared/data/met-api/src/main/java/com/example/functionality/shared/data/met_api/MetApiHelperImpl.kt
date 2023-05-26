@@ -7,7 +7,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class MetApiHelperImpl @Inject constructor(private val apiService: MetApiService) : MetApiHelper {
+internal class MetApiHelperImpl @Inject internal constructor(private val apiService: MetApiService) : MetApiHelper {
 
     override fun getObjectById(id: Int): Flow<MetObjectDto> = flow {
         emit(apiService.getObjectById(id).toDto())

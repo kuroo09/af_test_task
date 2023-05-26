@@ -1,4 +1,4 @@
-package com.example.met_api
+package com.example.functionality.shared.data.abstractions
 
 import com.example.functionality.shared.data.met_api.model.MetObjectDto
 import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
