@@ -9,8 +9,6 @@ import com.example.functionality.shared.data.met_api.entities.MetObjectDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.emitAll
-import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
@@ -23,16 +21,15 @@ class DetailViewModel @Inject constructor(
     /**
      * Observed LiveData that handles displaying the data that's fetched from the API.
      */
-    val result: StateFlow<Result<MetObjectDto>> = flow {
-        emitAll(getDetailUseCase(getSafeMetId()))
-    }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(),
-        initialValue = Result.Loading
-    )
+    val result: StateFlow<Result<MetObjectDto>> = getDetailUseCase(savedStateHandle.get<Int>("metId")!!)
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.WhileSubscribed(),
+            initialValue = Result.Loading
+        )
 
-    private fun getSafeMetId(): Int {
+/*    private fun getSafeMetId(): Int {
         return savedStateHandle.get<Int>("metId")
             ?: throw IllegalArgumentException("metId can not be null")
-    }
+    }*/
 }

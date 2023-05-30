@@ -16,7 +16,6 @@
         <argument
             android:name="metId"
             app:argType="integer" />
-
     </action>
 
 </navigation>
