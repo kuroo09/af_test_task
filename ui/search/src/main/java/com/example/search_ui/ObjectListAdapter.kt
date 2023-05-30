@@ -7,7 +7,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.functionality.shared.data.met_api.model.MetObjectId
+import com.example.functionality.shared.data.met_api.entities.MetObjectId
 import com.example.navigation.MainNavGraphDirections
 import com.example.search_ui.databinding.ListViewItemBinding
 
@@ -51,11 +51,11 @@ class ObjectListAdapter :
 
     companion object DiffCallback : DiffUtil.ItemCallback<MetObjectId>() {
         override fun areItemsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
-            return oldItem == newItem
+            return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(oldItem: MetObjectId, newItem: MetObjectId): Boolean {
-            return oldItem.id == newItem.id
+            return oldItem == newItem
         }
 
     }

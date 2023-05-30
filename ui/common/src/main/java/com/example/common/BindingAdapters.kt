@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.example.functionality.shared.data.met_api.model.BaseItem
+import com.example.functionality.shared.data.met_api.entities.BaseItem
 
 /**
  * BindingAdapter for ImageView to display image from received URL, a loading animation while URL

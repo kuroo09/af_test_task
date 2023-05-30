@@ -2,13 +2,13 @@ package com.example.met_api
 
 import com.example.functionality.shared.data.abstractions.MetRepository
 import com.example.functionality.shared.data.met_api.MetApiHelper
-import com.example.functionality.shared.data.met_api.model.MetObjectDto
-import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
+import com.example.functionality.shared.data.met_api.entities.MetObjectDto
+import com.example.functionality.shared.data.met_api.entities.SearchCollectionDto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
-import com.example.functionality.shared.data.met_api.model.Result
+import com.example.functionality.shared.data.met_api.entities.Result
 
 class MetRepositoryImpl @Inject constructor(
     private val metApi: MetApiHelper

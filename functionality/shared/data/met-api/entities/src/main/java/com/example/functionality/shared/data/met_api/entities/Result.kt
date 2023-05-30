@@ -1,4 +1,4 @@
-package com.example.functionality.shared.data.met_api.model
+package com.example.functionality.shared.data.met_api.entities
 
 /**
  * Interface for handling displaying LiveData.

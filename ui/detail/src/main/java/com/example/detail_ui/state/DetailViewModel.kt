@@ -4,8 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.detail.GetDetailsUseCase
-import com.example.functionality.shared.data.met_api.model.Result
-import com.example.functionality.shared.data.met_api.model.MetObjectDto
+import com.example.functionality.shared.data.met_api.entities.Result
+import com.example.functionality.shared.data.met_api.entities.MetObjectDto
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow

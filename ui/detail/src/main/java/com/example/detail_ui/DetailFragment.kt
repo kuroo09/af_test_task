@@ -16,8 +16,8 @@ import com.example.detail_ui.databinding.FragmentDetailBinding
 import com.example.detail_ui.state.DetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.functionality.shared.data.met_api.model.Result
-import com.example.functionality.shared.data.met_api.model.MetObjectDto
+import com.example.functionality.shared.data.met_api.entities.Result
+import com.example.functionality.shared.data.met_api.entities.MetObjectDto
 
 @AndroidEntryPoint
 class DetailFragment : Fragment() {

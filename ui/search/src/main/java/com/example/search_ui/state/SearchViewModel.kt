@@ -11,8 +11,8 @@ import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
-import com.example.functionality.shared.data.met_api.model.Result
-import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
+import com.example.functionality.shared.data.met_api.entities.Result
+import com.example.functionality.shared.data.met_api.entities.SearchCollectionDto
 import kotlinx.coroutines.flow.emitAll
 
 @HiltViewModel

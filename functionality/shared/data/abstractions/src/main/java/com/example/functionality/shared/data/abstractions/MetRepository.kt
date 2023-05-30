@@ -1,9 +1,9 @@
 package com.example.functionality.shared.data.abstractions
 
-import com.example.functionality.shared.data.met_api.model.MetObjectDto
-import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
+import com.example.functionality.shared.data.met_api.entities.MetObjectDto
+import com.example.functionality.shared.data.met_api.entities.SearchCollectionDto
 import kotlinx.coroutines.flow.Flow
-import com.example.functionality.shared.data.met_api.model.Result
+import com.example.functionality.shared.data.met_api.entities.Result
 
 interface MetRepository {
 

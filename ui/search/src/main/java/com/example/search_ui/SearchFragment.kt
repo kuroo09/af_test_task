@@ -17,8 +17,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import com.example.functionality.shared.data.met_api.model.Result
-import com.example.functionality.shared.data.met_api.model.SearchCollectionDto
+import com.example.functionality.shared.data.met_api.entities.Result
+import com.example.functionality.shared.data.met_api.entities.SearchCollectionDto
 import com.example.search_ui.databinding.FragmentSearchBinding
 import com.example.search_ui.state.SearchViewModel
 

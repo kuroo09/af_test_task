@@ -18,6 +18,7 @@
             <option value="$PROJECT_DIR$/functionality/shared/data" />
             <option value="$PROJECT_DIR$/functionality/shared/data/abstractions" />
             <option value="$PROJECT_DIR$/functionality/shared/data/met-api" />
+            <option value="$PROJECT_DIR$/functionality/shared/data/met-api/entities" />
             <option value="$PROJECT_DIR$/navigation" />
             <option value="$PROJECT_DIR$/ui" />
             <option value="$PROJECT_DIR$/ui/common" />
