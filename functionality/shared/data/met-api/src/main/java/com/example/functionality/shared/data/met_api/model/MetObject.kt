@@ -7,7 +7,7 @@ import com.squareup.moshi.Json
 /**
  * Object holding all data for the requested ID fetched from the API.
  */
-data class MetObject(
+internal data class MetObject(
     @Json(name = "objectID") val id: Int,
     @Json(name = "primaryImage") val imgUrl: String,
     val title: String,
